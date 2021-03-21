@@ -1,22 +1,22 @@
 export interface User {
-    id: number;
-    lastName: string;
-    firstName: string;
-    birthdate: Date;
-    login: string;
-    isActif: boolean;
+    readonly id?: number;
+    readonly lastName?: string;
+    readonly firstName?: string;
+    readonly birthdate?: Date;
+    readonly login?: string;
+    readonly isActif?: boolean;
 }
 
 export interface Account {
-    password: string;
+    readonly password?: string;
 }
 
 export type UserAccount = User & Account;
 
 export interface UserError {
-    lastNameError?: string;
-    firstNameError?: string;
-    birthdateError?: string;
-    loginError?: string;
-    passwordError?: string;
+    readonly lastNameError?: string;
+    readonly firstNameError?: string;
+    readonly birthdateError?: string;
+    readonly loginError?: string;
+    readonly passwordError?: string;
 }

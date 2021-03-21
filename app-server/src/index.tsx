@@ -6,7 +6,6 @@ import List from 'user-manager-react/src/container/list'
 function App({}: {}) {
     const [users] = React.useState<User[]>([]);
 
-    // return <div>ok</div>
     return <List users={users}/>
 }
 
