@@ -1,8 +1,6 @@
 import DetailComponent from './detail';
 import React from 'react';
-import Input from 'src/component/input';
-import Checkbox from 'src/component/checkbox';
-import DateInput from 'src/component/date-input';
+import { Input, Checkbox, DateInput } from 'src/component';
 import { preventDefault } from 'src/tools/dom';
 import { UserError, UserAccount } from 'user-manager-business/src/type/user';
 import { saveUser } from 'user-manager-business/src/service/user';

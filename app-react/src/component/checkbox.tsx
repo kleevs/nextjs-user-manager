@@ -1,11 +1,8 @@
-import React from 'react';
+import { ChangeEvent, FunctionComponent } from 'react';
 
-export default function Checkbox({checked, onChange}: {
-    checked: boolean;
+export default function Checkbox({Input: BaseInput, onChange}: {
+    Input: FunctionComponent<{ onChange: (e: ChangeEvent<HTMLInputElement>) => void; }>;
     onChange: (v: boolean) => void;
 }) {
-    return <input type="checkbox" 
-        checked={checked} 
-        onChange={(e) => onChange(e.target.checked)}
-    />
+    return BaseInput({ onChange: (e) => onChange(e.target.checked) });
 }

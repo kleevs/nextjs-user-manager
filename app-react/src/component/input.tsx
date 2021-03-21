@@ -1,8 +1,8 @@
-import React from 'react';
+import { FunctionComponent, ChangeEvent } from 'react';
 
-export default function Input({value, onChange}: {
-    value: string;
+export default function Input({Input: BaseInput, onChange}: {
+    Input: FunctionComponent<{ onChange: (e: ChangeEvent<HTMLInputElement>) => void; }>;
     onChange: (v: string) => void;
 }) {
-    return <input type='text' value={value} onChange={(e) => onChange(e.target.value)} />
+    return BaseInput({ onChange: (e) => onChange(e.target.value) });
 }
