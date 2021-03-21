@@ -1,5 +1,5 @@
 import React from "react";
-import * as ReactDOM from "react-dom";
+import { render } from "react-dom";
 import { User } from "user-manager-business/src/type/user";
 import List from 'user-manager-react/src/container/list'
 
@@ -9,7 +9,4 @@ function App({}: {}) {
     return <List users={users}/>
 }
 
-ReactDOM.render(
-    <App/>,
-    document.getElementById("app")
-);
+render(<App/>, document.getElementById("app"));
