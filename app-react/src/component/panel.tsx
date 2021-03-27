@@ -1,11 +1,11 @@
 import React from 'react';
 
-export default function Panel({Title, children}: {
-    Title: JSX.Element;
+export default function Panel({title, children}: {
+    title: JSX.Element | string;
     children: unknown;
 }) {
     return <div> 
-    <h1>{Title}</h1> 
+    <h1>{title}</h1> 
     <hr/>
     <div>
         {children}
