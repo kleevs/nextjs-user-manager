@@ -24,7 +24,7 @@ export default function Detail ({
         <h1 className="title">Détail de l'utilisateur</h1> 
         <hr/>
         <div className="container">
-            <form className="full-width center"  onSubmit={(e) => preventDefault(e, () => save().then(id => navigate(`/users/${id}`)))}>
+            <form className="full-width center"  onSubmit={(e) => preventDefault(e, () => save().then(id => id && navigate(`/users/${id}`)))}>
                 <LastNameNameInput error={errors.lastNameError} value={model.lastName} 
                     onChange={(lastName) => (onChange({...model, lastName}), setErrors({...errors, lastNameError: ''}))} />
                 <FirstNameInput error={errors.firstNameError} value={model.firstName} 

@@ -19,7 +19,7 @@ export default function Detail({user, onChange, errors, setErrors}: {
         PasswordInput={TextFieldWithError}
         IsActifCheckbox={Checkbox}
         preventDefault={preventDefault}
-        save={() => saveUser(user)}
+        save={() => saveUser(user).catch(setErrors).then(_ => _ || null)}
         navigate={(href) => location.href = href}
         model={user}
         onChange={onChange}
