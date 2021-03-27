@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Panel({title, children}: {
+export default function PanelComponent({title, children}: {
     title: JSX.Element | string;
     children: unknown;
 }) {

@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import React, { ComponentType, useState } from 'react';
 
-export function ParseInput<T>({ Field, parse, toStr, value, onChange }: {
-    Field: (v: {
+export default function ParseComponent<T>({ Field, parse, toStr, value, onChange }: {
+    Field: ComponentType<{
         value: string,
         onChange: (v: string)=>void;
-    }) => JSX.Element;
+    }>;
     parse: (v: string) => T;
     toStr: (v: T, c: string) => string;
     value: T,
@@ -13,11 +13,11 @@ export function ParseInput<T>({ Field, parse, toStr, value, onChange }: {
     const [state] = useState(() => ({ value: toStr(value, '') }));
     const { value: input } = state;
 
-    return Field({
-        value: toStr(value, input),
-        onChange: (v) => { 
+    return <Field
+        value={toStr(value, input)}
+        onChange={(v) => { 
             state.value = v;
             onChange(parse(v))
-        }
-    })
+        }}
+    />
 }
