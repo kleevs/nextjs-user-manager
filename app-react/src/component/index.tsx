@@ -6,6 +6,7 @@ import TextComponent from './text-component';
 import { dateToString, parseDate } from '../tools/format';
 import FieldError from './field-error';
 import { useComponent } from '../hook/use-component';
+import TextLabelComponent from './text-label-component';
 
 export function TextField({value, ...props}: {
     value: string;
@@ -16,12 +17,31 @@ export function TextField({value, ...props}: {
     />
 }
 
+export function TextLabelField({label, ...props}: {
+    label: string;
+    value: string;
+    onChange: (v: string) => void;
+}) {
+    return <TextLabelComponent label={label}>
+        <TextField {...props} />
+    </TextLabelComponent> 
+}
+
 export function TextFieldWithError({error, ...props}: {
     error: string;
     value: string;
     onChange: (v: string) => void;
 }) {
     return <FieldError error={error}><TextField {...props}/></FieldError>
+}
+
+export function TextLabelFieldWithError({error, ...props}: {
+    error: string;
+    value: string;
+    label: string;
+    onChange: (v: string) => void;
+}) {
+    return <FieldError error={error}><TextLabelField {...props}/></FieldError>
 }
 
 export function DateField({value, ...props}: {
@@ -36,12 +56,31 @@ export function DateField({value, ...props}: {
     />
 }
 
+export function DateLabelField({label, ...props}: {
+    label: string;
+    value: Date;
+    onChange: (v: Date) => void;
+}) {
+    return <TextLabelComponent label={label}>
+        <DateField {...props} />
+    </TextLabelComponent> 
+}
+
 export function DateFieldWithError({error, ...props}: {
     error: string;
     value: Date;
     onChange: (v: Date) => void;
 }) {
     return <FieldError error={error}><DateField {...props}/></FieldError>
+}
+
+export function DateLabelFieldWithError({error, ...props}: {
+    label: string;
+    error: string;
+    value: Date;
+    onChange: (v: Date) => void;
+}) {
+    return <FieldError error={error}><DateLabelField {...props}/></FieldError>
 }
 
 export function Checkbox({checked, ...props}: {
