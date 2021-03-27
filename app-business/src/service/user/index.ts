@@ -1,5 +1,5 @@
-import { saveUserPost, saveUserPut } from "../../tool/ajax-mock";
-import { saveUserFactory, removeUserFactory } from "./user";
+import { saveUserPost, saveUserPut, getUserGet, getUsersGet } from "../../tool/ajax-mock";
+import { saveUserFactory, removeUserFactory, getUsersFactory, getUserFactory } from "./user";
 
 export const saveUser = saveUserFactory({
     post: (_,user) => saveUserPost(user),
@@ -8,4 +8,12 @@ export const saveUser = saveUserFactory({
 
 export const removeUser = removeUserFactory({
     delete: () => Promise.resolve()
+});
+
+export const getUsers = getUsersFactory({
+    get: () => getUsersGet()
+});
+
+export const getUser = getUserFactory({
+    get: (uri) => getUserGet(uri)
 });

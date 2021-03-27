@@ -1,5 +1,5 @@
-import { USER } from "../../constant/url";
-import { UserAccount, UserError } from "../../type/user";
+import { USER, USERS } from "../../constant/url";
+import { UserAccount } from "../../type/user";
 
 export function saveUserFactory({post, put}: { 
     post: (uri: string, v: UserAccount) => Promise<number>;
@@ -26,5 +26,21 @@ export function removeUserFactory({delete: remove}: {
 }): (id: number) => Promise<void> {
     return function removeUser(id) {
         return remove(USER(id));
+    }
+}
+
+export function getUsersFactory({get}: { 
+    get: (uri: string) => Promise<UserAccount[]>;
+}): () => Promise<UserAccount[]>  {
+    return function getUsers() { 
+        return get(USERS); 
+    }
+}
+
+export function getUserFactory({get}: { 
+    get: (uri: string) => Promise<UserAccount>;
+}): (id: number) => Promise<UserAccount>  {
+    return function getUser(id) { 
+        return get(USER(id)); 
     }
 }

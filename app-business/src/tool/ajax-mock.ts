@@ -1,13 +1,18 @@
+import { USER } from "../constant/url";
 import { UserAccount } from "../type/user";
 
-const data = localStorage.getItem("users");
-const users: UserAccount[] = data && (JSON.parse(data || '') || []).map(_ => ({..._, birthdate: new Date(_.birthdate)})) || [];
+function load(): UserAccount[] {
+    const data = localStorage.getItem("users");
+    const users: UserAccount[] = data && (JSON.parse(data || '') || []).map(_ => ({..._, birthdate: new Date(_.birthdate)})) || [];
+    return users;
+}
 
 function save(users: UserAccount[]) {
     localStorage.setItem("users", JSON.stringify(users));
 }
 
 export function saveUserPut(user: UserAccount) {
+    const users = load();
     var id = users.length+1;
     const errors = [];
     if (!user.password) {
@@ -41,6 +46,7 @@ export function saveUserPut(user: UserAccount) {
 }
 
 export function saveUserPost(user: UserAccount) {
+    const users = load();
     const errors = [];
     if (!user.password) {
         errors.push({ code: "PSSW", message: 'Renseigner un mot de passe' });
@@ -72,4 +78,15 @@ export function saveUserPost(user: UserAccount) {
         password: stored?.password
     }]));
     return Promise.resolve(user.id); 
+}
+
+export function getUsersGet() {
+    const users = load();
+    return Promise.resolve(users);
+}
+
+export function getUserGet(uri: string) {
+    const id = +uri.substr(USER('' as any).length);
+    const users = load();
+    return Promise.resolve(users.filter(_ => _.id === id)[0]);
 }
