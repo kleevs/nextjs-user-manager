@@ -1,4 +1,4 @@
-import React from 'react'; 
+import React, { ComponentType } from 'react'; 
 import { Input as StyleInput, Checkbox as StyleCheckbox } from '../style';
 import CheckboxComponent from './checkbox-component';
 import ParseComponent from './parse-component';
@@ -7,6 +7,7 @@ import { dateToString, parseDate } from '../tools/format';
 import FieldError from './field-error';
 import { useComponent } from '../hook/use-component';
 import TextLabelComponent from './text-label-component';
+import { LayoutMobile } from './layout-mobile';
 
 export function TextField({value, ...props}: {
     value: string;
@@ -98,4 +99,13 @@ export function CheckboxWithError({error, ...props}: {
     onChange: (v: boolean) => void;
 }) {
     return <FieldError error={error}><Checkbox {...props}/></FieldError>
+}
+
+export function Layout({children, ...props}: {
+    Sidebar: JSX.Element;
+    children: unknown;
+    open: boolean;
+    onClose: () => void;
+}) {
+    return <LayoutMobile {...props}>{children}</LayoutMobile>
 }

@@ -1,7 +1,7 @@
 import { User } from "user-manager-business/src/type/user";
 import React, { ComponentType } from "react";
 
-export default function List ({Table, Panel, Link, removeUser, navigate, users, toDateString, stopPropagation}: {
+export default function List ({Table, Panel, Link, removeUser, navigate, users, toDateString, stopPropagation, preventDefault}: {
     Table: ComponentType<{
         titles: string[];
         rows: (string | JSX.Element)[][];
@@ -9,6 +9,7 @@ export default function List ({Table, Panel, Link, removeUser, navigate, users, 
     Panel: ComponentType<{ title: string; children: unknown; }>;
     Link: ComponentType<{ href?: string; onClick?: (e: any) => void;}>;
     toDateString: (v: Date) => string;
+    preventDefault: (e, callback: () => void) => void;
     stopPropagation: (e, callback: () => void) => void;
     removeUser: (id: number) => Promise<void>;
     navigate: (location: string) => void;
@@ -25,6 +26,6 @@ export default function List ({Table, Panel, Link, removeUser, navigate, users, 
                 <Link onClick={(e) => stopPropagation(e, () => removeUser(_.id).then(() => navigate('/')))} />
             ])}
         />
-        <Link href="/users">Nouvel utilisateur</Link>
+        <Link href="/users" onClick={(e) => preventDefault(e, () => navigate('/users'))}>Nouvel utilisateur</Link>
     </Panel>
 }

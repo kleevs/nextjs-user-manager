@@ -5,11 +5,12 @@ import { preventDefault } from '../../tools/dom';
 import { UserError, UserAccount } from 'user-manager-business/src/type/user';
 import { saveUser } from 'user-manager-business/src/service/user';
 
-export default function Detail({user, onChange, errors, setErrors}: {
+export default function Detail({user, onChange, errors, setErrors, navigate}: {
     user: UserAccount;
     onChange: (v: UserAccount) => void;
     errors: UserError;
     setErrors: (v: UserError) => void;
+    navigate: (href: string) => void;
 }) { 
     return <DetailComponent 
         FirstNameInput={TextLabelFieldWithError}
@@ -20,7 +21,7 @@ export default function Detail({user, onChange, errors, setErrors}: {
         IsActifCheckbox={Checkbox}
         preventDefault={preventDefault}
         save={() => saveUser(user).catch(setErrors).then(_ => _ || null)}
-        navigate={(href) => location.href = href}
+        navigate={navigate}
         model={user}
         onChange={onChange}
         errors={errors}
