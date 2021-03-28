@@ -1,5 +1,5 @@
 import React from "react";
-import { Table, Header, Body, Row, Cellule } from "user-manager-style/src/table";
+import { Table, Header, Body, Row, Cellule } from "../style";
 
 export default function TableComponent({titles, rows}: {
     titles: (JSX.Element | string)[];

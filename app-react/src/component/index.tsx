@@ -1,5 +1,5 @@
 import React from 'react'; 
-import { Input as StyleInput, Checkbox as StyleCheckbox } from 'user-manager-style/src/textfield';
+import { Input as StyleInput, Checkbox as StyleCheckbox } from '../style';
 import CheckboxComponent from './checkbox-component';
 import ParseComponent from './parse-component';
 import TextComponent from './text-component';
