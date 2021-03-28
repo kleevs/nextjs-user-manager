@@ -1,4 +1,5 @@
-import ListingComponent from './list';
+import ListingComponent from './table';
+import CardsComponent from './cards';
 import React from 'react';
 import { preventDefault, stopPropagation } from '../../tools/dom';
 import { dateToString } from '../../tools/format';
@@ -7,8 +8,9 @@ import { removeUser } from 'user-manager-business/src/service/user';
 import Panel from '../../component/panel-component';
 import Table from '../../component/table-component';
 import { Link } from "../../style";
+import { Card } from '../../component';
 
-export default function List({users, navigate}: {
+export function List({users, navigate}: {
     users: User[];
     navigate: (href: string) => void;
 }) { 
@@ -19,6 +21,22 @@ export default function List({users, navigate}: {
         users={users}
         toDateString={(v) => dateToString(v, '')}
         stopPropagation={stopPropagation}
+        preventDefault={preventDefault}
+        removeUser={(id) => removeUser(id).then(_ => {})}
+        navigate={navigate}
+    />
+}
+
+export function Cards({users, navigate}: {
+    users: User[];
+    navigate: (href: string) => void;
+}) { 
+    return <CardsComponent 
+        Panel={Panel}
+        Card={Card}
+        Link={Link}
+        users={users}
+        toDateString={(v) => dateToString(v, '')}
         preventDefault={preventDefault}
         removeUser={(id) => removeUser(id).then(_ => {})}
         navigate={navigate}

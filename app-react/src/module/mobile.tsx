@@ -1,9 +1,6 @@
-import React, { useState } from "react";
-import { ListModule } from './list'
-import { getUsers } from "user-manager-business/src/service/user";
-import { useAsync } from "../hook/use-async";
+import React from "react";
+import { CardsModule } from './list'
 import { Layout } from "../component";
-import { Sidebar } from "../container/sidebar/sidebar";
 import { DetailModule } from "./detail";
 
 export enum Page {
@@ -20,6 +17,6 @@ export function MobileModule({page, id, navigate}: {
     const onClose = () => navigate('/');
 
     return <Layout onClose={onClose} open={sidebarOpen} Sidebar={<DetailModule id={id} navigate={navigate} />}>
-        <ListModule navigate={navigate} />
+        <CardsModule navigate={navigate} />
     </Layout>;
 }

@@ -1,7 +1,7 @@
 import { User } from "user-manager-business/src/type/user";
 import React, { ComponentType } from "react";
 
-export default function List ({Table, Panel, Link, removeUser, navigate, users, toDateString, stopPropagation, preventDefault}: {
+export default function List({Table, Panel, Link, removeUser, navigate, users, toDateString, stopPropagation, preventDefault}: {
     Table: ComponentType<{
         titles: string[];
         rows: (string | JSX.Element)[][];
