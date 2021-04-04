@@ -2,7 +2,9 @@
   "name": "user-manager",
   "version": "0.0.1",
   "description": "",
-  "scripts": {},
+  "scripts": {
+    "test": "jest"
+  },
   "workspaces": [
     "app-business",
     "app-react",
@@ -11,10 +13,13 @@
     "app-style"
   ],
   "peerDependencies": {
+    "jest": "^26.6.3",
     "react": "17.0.1",
     "react-dom": "17.0.1"
   },
   "devDependencies": {
-    "@types/react-router-dom": "^5.1.7"
+    "@types/jest": "^26.0.22",
+    "@types/react-router-dom": "^5.1.7",
+    "ts-node": "^9.1.1"
   }
 }

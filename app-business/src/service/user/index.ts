@@ -2,8 +2,8 @@ import { saveUserPost, saveUserPut, getUserGet, getUsersGet } from "../../tool/a
 import { saveUserFactory, removeUserFactory, getUsersFactory, getUserFactory } from "./user";
 
 export const saveUser = saveUserFactory({
-    post: (_,user) => saveUserPost(user),
-    put: (_,user) => saveUserPut(user)
+    post: saveUserPost,
+    put: saveUserPut
 });
 
 export const removeUser = removeUserFactory({

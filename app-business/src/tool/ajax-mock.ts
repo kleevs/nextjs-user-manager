@@ -11,7 +11,7 @@ function save(users: UserAccount[]) {
     localStorage.setItem("users", JSON.stringify(users));
 }
 
-export function saveUserPut(user: UserAccount) {
+export function saveUserPut(uri: string, user: UserAccount) {
     const users = load();
     var id = users.length+1;
     const errors = [];
@@ -45,7 +45,7 @@ export function saveUserPut(user: UserAccount) {
     return Promise.resolve(id); 
 }
 
-export function saveUserPost(user: UserAccount) {
+export function saveUserPost(uri: string, user: UserAccount) {
     const users = load();
     const errors = [];
     if (!user.password) {

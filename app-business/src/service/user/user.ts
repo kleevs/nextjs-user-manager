@@ -1,14 +1,13 @@
 import { USER, USERS } from "../../constant/url";
-import { UserAccount } from "../../type/user";
 
-export function saveUserFactory({post, put}: { 
-    post: (uri: string, v: UserAccount) => Promise<number>;
-    put: (uri: string, v: UserAccount) => Promise<number>;
-}): (user: UserAccount) => Promise<number> { 
+export function saveUserFactory<T extends { id?: number }>({post, put}: { 
+    post: (uri: string, v: T) => Promise<number>;
+    put: (uri: string, v: T) => Promise<number>;
+}): <T2 extends T>(user: T2) => Promise<number> { 
     return function saveUser(user) { 
         return (!!user.id && 
-            post(USER(user.id), user) || 
-            put(USER(user.id), user))
+            put(USER(user.id), user) || 
+            post(USERS, user))
             .catch((errors: {code: string; message: string;}[]) => { 
                 throw {
                     lastNameError: errors.filter(_ => _.code === 'LSTN').map(_ => _.message)[0],
@@ -29,17 +28,17 @@ export function removeUserFactory({delete: remove}: {
     }
 }
 
-export function getUsersFactory({get}: { 
-    get: (uri: string) => Promise<UserAccount[]>;
-}): () => Promise<UserAccount[]>  {
+export function getUsersFactory<T>({get}: { 
+    get: (uri: string) => Promise<T[]>;
+}): () => Promise<T[]>  {
     return function getUsers() { 
         return get(USERS); 
     }
 }
 
-export function getUserFactory({get}: { 
-    get: (uri: string) => Promise<UserAccount>;
-}): (id: number) => Promise<UserAccount>  {
+export function getUserFactory<T>({get}: { 
+    get: (uri: string) => Promise<T>;
+}): (id: number) => Promise<T>  {
     return function getUser(id) { 
         return get(USER(id)); 
     }
