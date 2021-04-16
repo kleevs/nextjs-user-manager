@@ -1,10 +1,10 @@
-import { getUserFactory, getUsersFactory, saveUserFactory, removeUserFactory } from '../user'
+import { getUser, getUsers, saveUser, removeUser } from '../index'
+import { resolveDeps } from '../_deps_/index.deps'
 
 describe('getUser', () => {
     test('should request user by id', () => {
         const get = jest.fn(() => Promise.resolve('user account'));
-        const getUser = getUserFactory({ get })
-
+        resolveDeps({ getUser: jest.fn(() => Promise.resolve({ lastName: 'user account' })) })
         const result = getUser(3);
 
         return result.then(res => {
@@ -17,7 +17,7 @@ describe('getUser', () => {
 describe('getUsers', () => {
     test('should request users', () => {
         const get = jest.fn(() => Promise.resolve(['user 1', 'user 2', 'user 3']));
-        const getUsers = getUsersFactory({ get })
+        resolveDeps({ getUsers: jest.fn(() => Promise.resolve([{ lastName: 'user 1' }, { lastName: 'user 2' }, { lastName: 'user 3' }])) })
 
         const result = getUsers();
 
@@ -32,7 +32,6 @@ describe('saveUser', () => {
     test('should create new user', () => {
         const post = jest.fn(() => Promise.resolve(1));
         const put = jest.fn(() => Promise.resolve(2));
-        const saveUser = saveUserFactory({ post, put })
 
         const result = saveUser({ id: 0, value: 'new user' });
 
@@ -46,7 +45,6 @@ describe('saveUser', () => {
     test('should update user', () => {
         const post = jest.fn(() => Promise.resolve(1));
         const put = jest.fn(() => Promise.resolve(2));
-        const saveUser = saveUserFactory({ post, put })
 
         const result = saveUser({ id: 2, value: 'user' });
 
@@ -61,7 +59,6 @@ describe('saveUser', () => {
 describe('removeUser', () => {
     test('should remove user', () => {
         const remove = jest.fn();
-        const removeUser = removeUserFactory({ delete: remove })
         
         const result = removeUser(5);
 

@@ -1,19 +1,29 @@
-import { saveUserPost, saveUserPut, getUserGet, getUsersGet } from "../../tool/ajax-mock";
-import { saveUserFactory, removeUserFactory, getUsersFactory, getUserFactory } from "./user";
+import { USER, USERS } from "../../constant/url";
+import { post, put, remove, getUsers as ajaxUsers, getUser as ajaxUser } from './_deps_/index.deps'
 
-export const saveUser = saveUserFactory({
-    post: saveUserPost,
-    put: saveUserPut
-});
+export  function saveUser(user) { 
+    return (!!user.id && 
+        put(USER(user.id), user) || 
+        post(USERS, user))
+        .catch((errors: {code: string; message: string;}[]) => { 
+            throw {
+                lastNameError: errors.filter(_ => _.code === 'LSTN').map(_ => _.message)[0],
+                firstNameError: errors.filter(_ => _.code === 'FRSN').map(_ => _.message)[0],
+                birthdateError: errors.filter(_ => _.code === 'BIRTH').map(_ => _.message)[0],
+                loginError: errors.filter(_ => _.code === 'LGN').map(_ => _.message)[0],
+                passwordError: errors.filter(_ => _.code === 'PSSW').map(_ => _.message)[0]
+            }
+        });
+}
 
-export const removeUser = removeUserFactory({
-    delete: () => Promise.resolve()
-});
+export function removeUser(id) {
+    return remove(USER(id));
+}
 
-export const getUsers = getUsersFactory({
-    get: () => getUsersGet()
-});
+export  function getUsers() { 
+    return ajaxUsers(USERS); 
+}
 
-export const getUser = getUserFactory({
-    get: (uri) => getUserGet(uri)
-});
+export function getUser(id) { 
+    return ajaxUser(USER(id)); 
+}

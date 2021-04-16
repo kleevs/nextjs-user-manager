@@ -80,7 +80,7 @@ export function saveUserPost(uri: string, user: UserAccount) {
     return Promise.resolve(user.id); 
 }
 
-export function getUsersGet() {
+export function getUsersGet(uri: string) {
     const users = load();
     return Promise.resolve(users);
 }
