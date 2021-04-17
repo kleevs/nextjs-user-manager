@@ -3,12 +3,12 @@ import { resolveDeps } from '../_deps_/index.deps'
 
 describe('getUser', () => {
     test('should request user by id', () => {
-        const get = jest.fn(() => Promise.resolve('user account'));
-        resolveDeps({ getUser: jest.fn(() => Promise.resolve({ lastName: 'user account' })) })
+        const get = jest.fn(() => Promise.resolve({ lastName: 'user account' }))
+        resolveDeps({ getUser: get })
         const result = getUser(3);
 
         return result.then(res => {
-            expect(res).toBe('user account');
+            expect(res).toStrictEqual({ lastName: 'user account' });
             expect(get).toHaveBeenCalledWith('users/3');
         })
     })
@@ -16,13 +16,13 @@ describe('getUser', () => {
 
 describe('getUsers', () => {
     test('should request users', () => {
-        const get = jest.fn(() => Promise.resolve(['user 1', 'user 2', 'user 3']));
-        resolveDeps({ getUsers: jest.fn(() => Promise.resolve([{ lastName: 'user 1' }, { lastName: 'user 2' }, { lastName: 'user 3' }])) })
+        const get = jest.fn(() => Promise.resolve([{ lastName: 'user 1' }, { lastName: 'user 2' }, { lastName: 'user 3' }]))
+        resolveDeps({ getUsers: get })
 
         const result = getUsers();
 
         return result.then(res => {
-            expect(res).toStrictEqual(expect.arrayContaining(['user 1', 'user 2', 'user 3']));
+            expect(res).toStrictEqual(expect.arrayContaining([{ lastName: 'user 1' }, { lastName: 'user 2' }, { lastName: 'user 3' }]));
             expect(get).toHaveBeenCalledWith('users');
         })
     })
@@ -32,7 +32,7 @@ describe('saveUser', () => {
     test('should create new user', () => {
         const post = jest.fn(() => Promise.resolve(1));
         const put = jest.fn(() => Promise.resolve(2));
-
+        resolveDeps({ post, put })
         const result = saveUser({ id: 0, value: 'new user' });
 
         return result.then(res => {
@@ -45,6 +45,7 @@ describe('saveUser', () => {
     test('should update user', () => {
         const post = jest.fn(() => Promise.resolve(1));
         const put = jest.fn(() => Promise.resolve(2));
+        resolveDeps({ post, put })
 
         const result = saveUser({ id: 2, value: 'user' });
 
@@ -58,8 +59,9 @@ describe('saveUser', () => {
 
 describe('removeUser', () => {
     test('should remove user', () => {
-        const remove = jest.fn();
-        
+        const remove = jest.fn(()=> Promise.resolve());
+        resolveDeps({ remove })
+
         const result = removeUser(5);
 
         return result.then(() => {
