@@ -4,7 +4,8 @@ import type { Put, Post, Get, Remove } from './_deps_/user-factory.deps'
 export  const saveUserFactory = <TUser extends { id: number }>({put, post}: {
     put: Put<number, TUser>;
     post: Post<number, TUser>;
-}) => (user: TUser) => { 
+}) => 
+function saveUser (user: TUser) { 
     return (!!user.id && 
         put(USER(user.id), user) || 
         post(USERS, user))
@@ -21,18 +22,21 @@ export  const saveUserFactory = <TUser extends { id: number }>({put, post}: {
 
 export const removeUserFactory = <TUser>({remove}: {
     remove: Remove<TUser>;
-}) => (id: number) => {
+}) => 
+function removeUser(id: number) {
     return remove(USER(id));
 }
 
 export const getUsersFactory = <TUser>({get}: {
     get: Get<TUser>;
-}) => () => { 
+}) => 
+function getUsers() { 
     return get(USERS); 
 }
 
 export const getUserFactory = <TUser>({get}: {
     get: Get<TUser>
-}) => (id: number) => { 
+}) => 
+function getUser(id: number) { 
     return get(USER(id)); 
 }
