@@ -1,22 +1,17 @@
-import { getUser, getUsers, saveUser, removeUser } from '../index'
-import * as deps from '../_deps_/index.deps'
-import { UserAccount } from '../../../type/user';
-const mockModule: <T>(module: T) => {[k in keyof T]: {
-    mock: <TResult, TArg extends unknown[]>(implementation?: T[k]) => jest.Mock<TResult,TArg>
-} } = (module) => {
-    Object.keys(module).forEach(_ => module[_] = null)
-    const results = Object.keys(module).map(key => ({
-        [key]: {
-            mock: (implementation) => module[key] = jest.fn(implementation)
-        }
-    }))
-    return results.reduce((previous, current) => ({...previous, ...current})) as any
-}
-const mock = mockModule(deps);
+import { getUserFactory, getUsersFactory, saveUserFactory, removeUserFactory } from '../user-factory'
+const get = jest.fn();
+const post = jest.fn();
+const put = jest.fn();
+const remove = jest.fn();
+
+const getUser = getUserFactory({ get });
+const getUsers = getUsersFactory({ get });
+const saveUser = saveUserFactory({ post, put });
+const removeUser = removeUserFactory({ remove });
 
 describe('getUser', () => {
     test('should request user by id', () => {
-        const get = mock.getUser.mock<Promise<UserAccount>, [string]>(() => Promise.resolve({ lastName: 'user account' }))
+        get.mockReturnValue(Promise.resolve({ lastName: 'user account' }))
         const result = getUser(3);
 
         return result.then(res => {
@@ -28,7 +23,7 @@ describe('getUser', () => {
 
 describe('getUsers', () => {
     test('should request users', () => {
-        const get = mock.getUsers.mock<Promise<UserAccount[]>, [string]>(() => Promise.resolve([{ lastName: 'user 1' }, { lastName: 'user 2' }, { lastName: 'user 3' }]))
+        get.mockReturnValue(Promise.resolve([{ lastName: 'user 1' }, { lastName: 'user 2' }, { lastName: 'user 3' }]))
         const result = getUsers();
 
         return result.then(res => {
@@ -40,8 +35,8 @@ describe('getUsers', () => {
 
 describe('saveUser', () => {
     test('should create new user', () => {
-        const post = mock.post.mock<Promise<number>, [string]>(() => Promise.resolve(1))
-        const put = mock.put.mock<Promise<number>, [string]>(() => Promise.resolve(2))
+        post.mockReturnValue(Promise.resolve(1))
+        put.mockReturnValue(Promise.resolve(2))
 
         const result = saveUser({ id: 0, value: 'new user' });
 
@@ -53,8 +48,8 @@ describe('saveUser', () => {
     })
 
     test('should update user', () => {
-        const post = mock.post.mock<Promise<number>, [string]>(() => Promise.resolve(1))
-        const put = mock.put.mock<Promise<number>, [string]>(() => Promise.resolve(2))
+        post.mockReturnValue(Promise.resolve(1))
+        put.mockReturnValue(Promise.resolve(2))
 
         const result = saveUser({ id: 2, value: 'user' });
 
@@ -68,7 +63,7 @@ describe('saveUser', () => {
 
 describe('removeUser', () => {
     test('should remove user', () => {
-        const remove = mock.remove.mock<Promise<void>, [string]>(() => Promise.resolve())
+        remove.mockReturnValue(Promise.resolve())
 
         const result = removeUser(5);
 
