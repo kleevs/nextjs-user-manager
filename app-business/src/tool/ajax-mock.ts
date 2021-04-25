@@ -1,4 +1,3 @@
-import { USER } from "../constant/url";
 import { UserAccount } from "../type/user";
 
 function load(): UserAccount[] {
@@ -88,7 +87,7 @@ export function getUsersGet<T>(uri: string) {
 }
 
 export function getUserGet<T>(uri: string) {
-    const id = +uri.substr(USER('' as any).length);
+    const id = +uri.substr('users/'.length);
     const users = load();
     return Promise.resolve<T>(users.filter(_ => _.id === id)[0] as any);
 }

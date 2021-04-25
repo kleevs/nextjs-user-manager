@@ -1,4 +1,5 @@
-import { USER, USERS } from "../../constant/url";
+const USERS = "users";
+const USER = (id: number) => `users/${id || ''}`;
 
 export type SaveUserDeps<TData> = {
     post: (uri: string, data: TData) => Promise<number>

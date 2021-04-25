@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { User, UserError } from "user-manager-business/src/type/user";
 import Detail from '../container/detail'
-import { getUser } from "user-manager-business/src/service/user";
+import { getUser } from "user-manager-business/src/main";
 
 export function DetailModule({id, navigate}: {
     id: number;
