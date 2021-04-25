@@ -1,18 +1,12 @@
-import { getUserFactory, getUsersFactory, saveUserFactory, removeUserFactory, Deps as DepsOfT } from '../user-factory'
+import { getUserFactory, getUsersFactory, saveUserFactory, removeUserFactory, SaveUserDeps, RemoveUsersDeps, GetUserDeps } from '../user-factory'
 
-type Get = DepsOfT<string>['Get'];
-type Gets = DepsOfT<string[]>['Get'];
-type Post = DepsOfT<{ id: number, name: string }>['Post'];
-type Put = DepsOfT<{ id: number, name: string }>['Put'];
-type Remove = DepsOfT<string>['Remove'];
+const get = jest.fn(null as GetUserDeps<string>['get']);
+const gets = jest.fn(null as GetUserDeps<string[]>['get']);
+const post = jest.fn(null as SaveUserDeps<{id: number; name: string}>['post']);
+const put = jest.fn(null as SaveUserDeps<{id: number; name: string}>['put']);
+const remove = jest.fn(null as RemoveUsersDeps['remove']);
 
-const get = jest.fn(null as Get);
-const gets = jest.fn(null as Gets);
-const post = jest.fn(null as Post);
-const put = jest.fn(null as Put);
-const remove = jest.fn(null as Remove);
-
-const getUser = getUserFactory({ get });
+const getUser = getUserFactory<string>({ get });
 const getUsers = getUsersFactory({ get: gets });
 const saveUser = saveUserFactory({ post, put });
 const removeUser = removeUserFactory({ remove });

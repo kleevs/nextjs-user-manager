@@ -1,16 +1,19 @@
 import { USER, USERS } from "../../constant/url";
 
-export type Deps<TUser> = {
-    Get: (uri: string) => Promise<TUser>;
-    Put: (uri: string, data: TUser) => Promise<number>;
-    Post: (uri: string, data: TUser) => Promise<number>;
-    Remove: (uri: string) => Promise<void>;
+export type SaveUserDeps<TData> = {
+    post: (uri: string, data: TData) => Promise<number>
+    put: (uri: string, data: TData) => Promise<number>
 }
 
-export  const saveUserFactory = <TUser extends { id: number }>({put, post}: {
-    put: Deps<TUser>['Put'];
-    post: Deps<TUser>['Post'];
-}) => 
+export type GetUserDeps<TResult> = {
+    get: (uri: string) => Promise<TResult>;
+}
+
+export type RemoveUsersDeps = {
+    remove: (uri: string) => Promise<void>;
+}
+
+export  const saveUserFactory = <TUser extends { id: number }>({put, post}: SaveUserDeps<TUser>) => 
 function saveUser (user: TUser) { 
     return (!!user.id && 
         put(USER(user.id), user) || 
@@ -26,23 +29,17 @@ function saveUser (user: TUser) {
         });
 }
 
-export const removeUserFactory = <TUser>({remove}: {
-    remove: Deps<TUser>['Remove']
-}) => 
+export const removeUserFactory = ({remove}: RemoveUsersDeps) => 
 function removeUser(id: number) {
     return remove(USER(id));
 }
 
-export const getUsersFactory = <TUser>({get}: {
-    get: Deps<TUser[]>['Get']
-}) => 
+export const getUsersFactory = <TUser>({get}: GetUserDeps<TUser[]>) => 
 function getUsers() { 
     return get(USERS); 
 }
 
-export const getUserFactory = <TUser>({get}: {
-    get: Deps<TUser>['Get']
-}) => 
+export const getUserFactory = <TUser>({get}: GetUserDeps<TUser>) => 
 function getUser(id: number) { 
     return get(USER(id)); 
 }

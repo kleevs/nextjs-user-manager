@@ -11,7 +11,8 @@ function save(users: UserAccount[]) {
     localStorage.setItem("users", JSON.stringify(users));
 }
 
-export function saveUserPut(uri: string, user: UserAccount) {
+export function saveUserPut<TResult, T>(uri: string, usr: T) {
+    const user = usr as UserAccount;
     const users = load();
     var id = users.length+1;
     const errors = [];
@@ -42,10 +43,11 @@ export function saveUserPut(uri: string, user: UserAccount) {
         isActif: user.isActif,
         password: user.password
     }]));
-    return Promise.resolve(id); 
+    return Promise.resolve<TResult>(id as any); 
 }
 
-export function saveUserPost(uri: string, user: UserAccount) {
+export function saveUserPost<TResult, T>(uri: string, usr: T) {
+    const user = usr as UserAccount;
     const users = load();
     const errors = [];
     if (!user.password) {
@@ -77,16 +79,16 @@ export function saveUserPost(uri: string, user: UserAccount) {
         isActif: user.isActif,
         password: stored?.password
     }]));
-    return Promise.resolve(user.id); 
+    return Promise.resolve<TResult>(user.id as any); 
 }
 
-export function getUsersGet(uri: string) {
+export function getUsersGet<T>(uri: string) {
     const users = load();
-    return Promise.resolve(users);
+    return Promise.resolve<T>(users as any);
 }
 
-export function getUserGet(uri: string) {
+export function getUserGet<T>(uri: string) {
     const id = +uri.substr(USER('' as any).length);
     const users = load();
-    return Promise.resolve(users.filter(_ => _.id === id)[0]);
+    return Promise.resolve<T>(users.filter(_ => _.id === id)[0] as any);
 }
