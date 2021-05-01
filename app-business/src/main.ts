@@ -1,4 +1,4 @@
-import { saveUserFactory, removeUserFactory, getUserFactory, getUsersFactory } from './service/user/user-factory'
+import { saveUserFactory, removeUserFactory, getUserFactory, getUsersFactory } from './user/service/user-factory'
 import { saveUserPost, saveUserPut, getUserGet, getUsersGet } from './tool/ajax-mock'
 
 export const saveUser = saveUserFactory({ put: saveUserPut, post: saveUserPost })
