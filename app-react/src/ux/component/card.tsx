@@ -1,9 +1,14 @@
+import type { stopPropagation } from '../../tools/dom'
 import React from 'react';
 
-export default function CardComponent({onRemove, onClick, children, stopPropagation}: {
+type Deps = {
+    stopPropagation: typeof stopPropagation;
+}
+
+export default ({ stopPropagation }: Deps) => 
+function Card({onRemove, onClick, children}: {
     onRemove: () => void; 
     onClick: () => void; 
-    stopPropagation: (e, c: ()=>void) => void;
     children: unknown
 }) {
     return <div onClick={() => onClick()}>

@@ -1,4 +1,4 @@
-import { getUserFactory, getUsersFactory, saveUserFactory, removeUserFactory, SaveUserDeps, RemoveUsersDeps, GetUserDeps } from '../user-factory'
+import { getUserFactory, getUsersFactory, saveUserFactory, removeUserFactory, SaveUserDeps, RemoveUsersDeps, GetUserDeps } from '../ajax'
 
 const get = jest.fn(null as GetUserDeps<string>['get']);
 const gets = jest.fn(null as GetUserDeps<string[]>['get']);

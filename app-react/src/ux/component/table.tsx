@@ -1,11 +1,20 @@
+import type { Table, Header, Body, Row, Cellule } from "../../style";
 import React from "react";
-import { Table, Header, Body, Row, Cellule } from "../style";
 
-export default function TableComponent({titles, rows}: {
+type Deps = {
+    Table: typeof Table;
+    Header: typeof Header;
+    Body: typeof Body;
+    Row: typeof Row;
+    Cellule: typeof Cellule;
+}
+
+export default ({ Table: TableStyle, Header, Body, Row, Cellule }: Deps) => 
+function Table({titles, rows}: {
     titles: (JSX.Element | string)[];
     rows: (JSX.Element | string)[][];
 }) {
-    return <Table>
+    return <TableStyle>
         <Header> 
             {titles?.length > 0 && <Row> 
                 {titles.map((_, i) => <Cellule key={i}>{_}</Cellule>)}
@@ -16,5 +25,5 @@ export default function TableComponent({titles, rows}: {
                 {row.map((c, j) => <Cellule key={j}>{c}</Cellule>)}
             </Row>)}
         </Body>
-    </Table>
+    </TableStyle>
 }

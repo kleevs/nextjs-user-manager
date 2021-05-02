@@ -27,7 +27,8 @@ const Block = styled.div`
     `}
 `;
 
-export function LayoutMobile({Sidebar, children, open, onClose}: {
+export default () => 
+function LayoutMobile({Sidebar, children, open, onClose}: {
     Sidebar: JSX.Element;
     children: unknown;
     open: boolean;
