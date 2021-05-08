@@ -11,7 +11,7 @@ function save(users: UserAccount[]) {
 }
 
 export function saveUserPut<TResult, T>(uri: string, usr: T) {
-    const user = usr as UserAccount;
+    const user = usr as any as UserAccount;
     const users = load();
     var id = users.length+1;
     const errors = [];
@@ -46,7 +46,7 @@ export function saveUserPut<TResult, T>(uri: string, usr: T) {
 }
 
 export function saveUserPost<TResult, T>(uri: string, usr: T) {
-    const user = usr as UserAccount;
+    const user = usr as any as UserAccount;
     const users = load();
     const errors = [];
     if (!user.password) {

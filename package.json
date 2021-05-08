@@ -3,14 +3,13 @@
   "version": "0.0.1",
   "description": "",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "dev": "yarn workspace server run dev"
   },
+  "private": true,
   "workspaces": [
-    "app-business",
-    "app-react",
-    "app-nextjs",
-    "app-server",
-    "app-style"
+    "packages/**",
+    "server"
   ],
   "peerDependencies": {
     "jest": "^26.6.3",
