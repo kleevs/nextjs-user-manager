@@ -4,7 +4,8 @@
   "description": "",
   "scripts": {
     "test": "jest",
-    "dev": "yarn workspace server run dev"
+    "dev": "yarn workspace server run dev",
+    "nextjs": "yarn workspace nextjs run dev"
   },
   "private": true,
   "workspaces": [

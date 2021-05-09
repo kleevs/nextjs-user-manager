@@ -1,5 +1,5 @@
 {
-  "name": "user-manager-nextjs",
+  "name": "nextjs",
   "version": "0.0.1",
   "description": "",
   "main": "./src/index.js",
@@ -17,7 +17,6 @@
   "author": "kleevs",
   "license": "MIT",
   "dependencies": {
-    "user-manager-react": "",
     "animate.css": "^3.7.2",
     "awesome-typescript-loader": "^5.2.1",
     "file-loader": "^3.0.1",
@@ -26,7 +25,8 @@
     "jquery": "^3.5.1",
     "next": "9.5.3",
     "numeral": "^2.0.6",
-    "toastr": "^2.1.4"
+    "toastr": "^2.1.4",
+    "user-manager-react": "^0.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.13.10",
