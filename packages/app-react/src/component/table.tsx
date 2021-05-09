@@ -1,8 +1,5 @@
-import type { Link } from "../../style";
-import type { Panel, Table } from '../../ux/main';
+import type { Link, Panel, Table, dateToString, preventDefault, stopPropagation } from "lib/src/main";
 import type { User } from "user-manager-business/src/type/user";
-import type { dateToString } from '../../tools/format'
-import type { preventDefault, stopPropagation } from '../../tools/dom'
 import type { removeUser } from 'user-manager-business/src/main';
 import React from "react";
 

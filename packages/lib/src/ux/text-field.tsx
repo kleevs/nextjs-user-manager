@@ -1,11 +1,12 @@
-import type { Input } from '../../style';
 import React from 'react'
 
-type Deps = {
-    Input: typeof Input;
-}
+import styled from 'styled-components';
 
-export default ({Input}: Deps) =>
+const InputCss = () => ``;
+
+export const Input = (styled.input)`${InputCss()}`;
+
+export default () =>
 function TextField({value, error, label, onChange}: {
     label: string; 
     error: string;

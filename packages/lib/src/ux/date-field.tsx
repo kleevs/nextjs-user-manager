@@ -1,14 +1,18 @@
-import type { Input } from '../../style';
-import type { dateToString, parseDate } from '../../tools/format';
+import type { dateToString, parseDate } from '../format/date';
 import React, { useState } from 'react'
 
+import styled from 'styled-components';
+
+const InputCss = () => ``;
+
+export const Input = (styled.input)`${InputCss()}`;
+
 type Deps = {
-    Input: typeof Input;
     dateToString: typeof dateToString;
     parseDate: typeof parseDate;
 }
 
-export default ({Input, dateToString, parseDate}: Deps) =>
+export default ({dateToString, parseDate}: Deps) =>
 function DateField({label, error, value, onChange}: {
     label: string; 
     error: string;

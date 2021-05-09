@@ -1,10 +1,10 @@
 import type { User, UserError } from "user-manager-business/src/type/user";
-import type { Detail } from '../main'
 import type { getUser } from "user-manager-business/src/main";
+import type Detail from '../component/detail'
 import React, { useEffect, useState } from "react";
 
 type Deps = {
-    Detail: typeof Detail;
+    Detail: (typeof Detail) extends (...args: any[]) => infer T ? T : typeof Detail;
     getUser: typeof getUser;
 }
 

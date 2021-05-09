@@ -1,4 +1,4 @@
-import type { stopPropagation } from '../../tools/dom'
+import type { stopPropagation } from '../helper/dom'
 import React from 'react';
 
 type Deps = {

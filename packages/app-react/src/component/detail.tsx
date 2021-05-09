@@ -1,8 +1,7 @@
-import type { TextField, DateField, Checkbox } from '../../ux/main'
-import type { preventDefault } from '../../tools/dom'
+import type { TextField, DateField, Checkbox, preventDefault } from 'lib/src/main'
 import type { saveUser } from 'user-manager-business/src/main';
+import type { UserAccount, UserError } from "user-manager-business/src/type/user";
 import React from "react";
-import { UserAccount, UserError } from "user-manager-business/src/type/user";
 
 type Deps = {
     TextField: typeof TextField;

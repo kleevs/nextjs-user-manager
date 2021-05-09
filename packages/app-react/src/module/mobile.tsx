@@ -1,11 +1,12 @@
-import type { CardsModule, DetailModule } from '../main'
-import type { LayoutMobile } from "../../ux/main";
+import type { LayoutMobile } from "lib/src/main";
+import type { CardsModuleFactory } from './list'
+import type DetailModuleFactory from './detail'
 import React from "react";
 
 type Deps = {
     LayoutMobile: typeof LayoutMobile;
-    CardsModule: typeof CardsModule; 
-    DetailModule: typeof DetailModule;
+    CardsModule: (typeof CardsModuleFactory) extends (...args: any[]) => infer T ? T : typeof CardsModuleFactory; 
+    DetailModule: (typeof DetailModuleFactory) extends (...args: any[]) => infer T ? T : typeof DetailModuleFactory; 
 }
 
 export enum Page {
