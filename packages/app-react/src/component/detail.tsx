@@ -1,4 +1,3 @@
-import "user-manager-business/types";
 import { TextField, DateField, Checkbox, preventDefault } from 'lib'
 import { saveUser } from 'user-manager-business';
 import React from "react";

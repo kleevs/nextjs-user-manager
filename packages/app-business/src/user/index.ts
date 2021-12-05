@@ -1,4 +1,4 @@
-import { get, post, put, remove } from "src/ajax";
+import { get, post, put, remove } from "../ajax";
 
 const USERS = "users";
 const USER = (id: number) => `users/${id || ''}`;

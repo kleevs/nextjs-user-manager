@@ -1,4 +1,4 @@
-import "user-manager-business/types";
+import type {} from "user-manager-business/types";
 import { Link, Card, Panel, dateToString, preventDefault } from "lib";
 import { removeUser } from 'user-manager-business';
 import React from "react";

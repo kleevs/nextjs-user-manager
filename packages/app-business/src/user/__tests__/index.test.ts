@@ -1,4 +1,4 @@
-import { get, put, post, remove } from "src/ajax";
+import { get, put, post, remove } from "ajax";
 import { getUser, getUsers, saveUser, removeUser } from "..";
 import { mock } from 'lib';
 

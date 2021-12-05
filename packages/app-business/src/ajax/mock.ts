@@ -8,8 +8,8 @@ function save(users: UserAccount[]) {
     localStorage.setItem("users", JSON.stringify(users));
 }
 
-export function saveUserPut<TResult, T>(uri: string, usr: T) {
-    const user = usr as any as UserAccount;
+export function put<TResult, TData>(uri: string, data: TData): Promise<TResult> {
+    const user = data as any as UserAccount;
     const users = load();
     var id = users.length+1;
     const errors = [];
@@ -43,8 +43,8 @@ export function saveUserPut<TResult, T>(uri: string, usr: T) {
     return Promise.resolve<TResult>(id as any); 
 }
 
-export function saveUserPost<TResult, T>(uri: string, usr: T) {
-    const user = usr as any as UserAccount;
+export function post<TResult, TData>(uri: string, data: TData): Promise<TResult> {
+    const user = data as any as UserAccount;
     const users = load();
     const errors = [];
     if (!user.password) {
@@ -79,13 +79,17 @@ export function saveUserPost<TResult, T>(uri: string, usr: T) {
     return Promise.resolve<TResult>(user.id as any); 
 }
 
-export function getUsersGet<T>(uri: string) {
+export function get<TResult>(uri: string): Promise<TResult> {
+    if (uri.startsWith('users/')) {
+        const id = +uri.substr('users/'.length);
+        const users = load();
+        return Promise.resolve<TResult>(users.filter(_ => _.id === id)[0] as any);
+    }
+
     const users = load();
-    return Promise.resolve<T>(users as any);
+    return Promise.resolve<TResult>(users as any);
 }
 
-export function getUserGet<T>(uri: string) {
-    const id = +uri.substr('users/'.length);
-    const users = load();
-    return Promise.resolve<T>(users.filter(_ => _.id === id)[0] as any);
+export function remove<TResult>(uri: string): Promise<TResult> {
+    throw 'NotImplementedException';
 }
