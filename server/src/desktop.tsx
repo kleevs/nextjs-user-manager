@@ -1,7 +1,7 @@
 import React from "react";
 import { render } from "react-dom";
 import { BrowserRouter as Router, Switch, Route, useHistory } from "react-router-dom";
-import { ListModule, DetailModule } from 'user-manager-react/src/main'
+import { ListModule, DetailModule } from 'user-manager-react'
 
 function Content() {
     const history = useHistory();
