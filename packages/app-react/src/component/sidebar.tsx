@@ -1,7 +1,6 @@
 import React from "react";
 
-export default () => 
-function Sidebar({onClose}: {
+export default function Sidebar({onClose}: {
     onClose: () => void;
 }) {
     return <div>

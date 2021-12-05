@@ -1,20 +1,8 @@
-import type { Link, Panel, Table, dateToString, preventDefault, stopPropagation } from "lib/src/main";
-import type { User } from "user-manager-business/src/type/user";
-import type { removeUser } from 'user-manager-business/src/main';
+import { Link, Panel, Table, dateToString, preventDefault, stopPropagation } from "lib";
+import { removeUser } from 'user-manager-business';
 import React from "react";
 
-type Deps = {
-    Link: typeof Link;
-    Table: typeof Table;
-    Panel: typeof Panel;
-    dateToString: typeof dateToString;
-    preventDefault: typeof preventDefault;
-    stopPropagation: typeof stopPropagation;
-    removeUser: typeof removeUser;
-}
-
-export default ({Table, Panel, Link, stopPropagation, preventDefault, dateToString, removeUser}: Deps) => 
-function List({navigate, users }: {
+export default function List({navigate, users }: {
     navigate: (location: string) => void;
     users: User[];
 }) {

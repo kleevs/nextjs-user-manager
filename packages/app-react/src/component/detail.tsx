@@ -1,18 +1,9 @@
-import type { TextField, DateField, Checkbox, preventDefault } from 'lib/src/main'
-import type { saveUser } from 'user-manager-business/src/main';
-import type { UserAccount, UserError } from "user-manager-business/src/type/user";
+import "user-manager-business/types";
+import { TextField, DateField, Checkbox, preventDefault } from 'lib'
+import { saveUser } from 'user-manager-business';
 import React from "react";
 
-type Deps = {
-    TextField: typeof TextField;
-    DateField: typeof DateField;
-    Checkbox: typeof Checkbox;
-    preventDefault: typeof preventDefault;
-    saveUser: typeof saveUser;
-}
-
-export default ({TextField, DateField, Checkbox, preventDefault, saveUser}: Deps) => 
-function Detail ({
+export default function Detail ({
     navigate,
     model, errors, onChange, setErrors
 }: {

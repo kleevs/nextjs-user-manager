@@ -2,6 +2,10 @@
   "name": "user-manager-react",
   "version": "0.0.1",
   "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc"
+  },
   "devDependencies": {
     "@types/node": "^7.0.14",
     "@types/styled-components": "5.1.9",

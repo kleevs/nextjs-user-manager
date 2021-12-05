@@ -1,19 +1,9 @@
-import type { Link, Card, Panel, dateToString, preventDefault } from "lib/src/main";
-import type { User } from "user-manager-business/src/type/user";
-import type { removeUser } from 'user-manager-business/src/main';
+import "user-manager-business/types";
+import { Link, Card, Panel, dateToString, preventDefault } from "lib";
+import { removeUser } from 'user-manager-business';
 import React from "react";
 
-type Deps = {
-    Link: typeof Link;
-    Card: typeof Card;
-    Panel: typeof Panel;
-    dateToString: typeof dateToString;
-    preventDefault: typeof preventDefault;
-    removeUser: typeof removeUser;
-}
-
-export default ({ Link, Card, Panel, dateToString, preventDefault, removeUser}: Deps) => 
-function Cards({navigate, users}: {
+export default function Cards({navigate, users}: {
     navigate: (location: string) => void;
     users: User[];
 }) {
