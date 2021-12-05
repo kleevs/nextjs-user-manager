@@ -1,4 +1,4 @@
-import { all, createStore } from '../store'
+import { all, createStore } from '..'
 
 describe('store all', () => {
     test('should request user by id', () => {

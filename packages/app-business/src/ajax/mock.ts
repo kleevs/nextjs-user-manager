@@ -1,5 +1,3 @@
-import { UserAccount } from "../type/user";
-
 function load(): UserAccount[] {
     const data = localStorage.getItem("users");
     const users: UserAccount[] = data && (JSON.parse(data || '') || []).map(_ => ({..._, birthdate: new Date(_.birthdate)})) || [];

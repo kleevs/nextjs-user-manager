@@ -1,4 +1,4 @@
-export interface User {
+declare interface User {
     readonly id: number;
     readonly lastName?: string;
     readonly firstName?: string;
@@ -7,13 +7,13 @@ export interface User {
     readonly isActif?: boolean;
 }
 
-export interface Account {
+declare interface Account {
     readonly password?: string;
 }
 
-export type UserAccount = User & Account;
+declare type UserAccount = User & Account;
 
-export interface UserError {
+declare interface UserError {
     readonly lastNameError?: string;
     readonly firstNameError?: string;
     readonly birthdateError?: string;

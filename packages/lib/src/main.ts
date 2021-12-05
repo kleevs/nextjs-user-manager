@@ -8,6 +8,8 @@ import TextFieldFactory from './ux/text-field'
 import DateFieldFactory from './ux/date-field'
 import LayoutMobileFactory from './ux/layout-mobile'
 
+export * from './test';
+
 export { Link } from './ux/clickable'
 export { dateToString, parseDate } from './format/date'
 export { preventDefault, stopPropagation } from './helper/dom'

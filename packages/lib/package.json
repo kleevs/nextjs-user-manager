@@ -2,7 +2,12 @@
   "name": "lib",
   "version": "0.0.1",
   "description": "",
+  "main": "dist/main.js",
+  "scripts": {
+    "build": "tsc"
+  },
   "devDependencies": {
+    "@types/jest": "^27.0.2"
   },
   "keywords": [],
   "author": "kleevs",

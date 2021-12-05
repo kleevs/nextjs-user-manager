@@ -2,9 +2,10 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": ".",
+    "outDir": "dist",
     "experimentalDecorators": true,
     "sourceMap": false,
-    "declaration": false,
+    "declaration": true,
     "esModuleInterop": true,
     "module": "commonjs",
     "moduleResolution": "node",
@@ -12,8 +13,10 @@
     "target": "es5",
     "jsx": "react",
     "typeRoots": [
+      "./types",
       "node_modules/@types",
-      "../node_modules/@types"
+      "../node_modules/@types",
+      "../../node_modules/@types"
     ],
     "lib": [
       "es2016",
@@ -21,6 +24,7 @@
     ]
   },
   "exclude" : [
-    "./node_modules"
+    "./node_modules",
+    "./dist"
   ]
 }

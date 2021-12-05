@@ -1,27 +1,12 @@
-import { getUserFactory, getUsersFactory, saveUserFactory, removeUserFactory, SaveUserDeps, RemoveUsersDeps, GetUserDeps } from '../ajax'
+import { get, put, post, remove } from "src/ajax";
+import { getUser, getUsers, saveUser, removeUser } from "..";
+import { mock } from 'lib';
 
-const get = jest.fn(null as GetUserDeps<string>['get']);
-const gets = jest.fn(null as GetUserDeps<string[]>['get']);
-const post = jest.fn(null as SaveUserDeps<{id: number; name: string}>['post']);
-const put = jest.fn(null as SaveUserDeps<{id: number; name: string}>['put']);
-const remove = jest.fn(null as RemoveUsersDeps['remove']);
-
-const getUser = getUserFactory<string>({ get });
-const getUsers = getUsersFactory({ get: gets });
-const saveUser = saveUserFactory({ post, put });
-const removeUser = removeUserFactory({ remove });
-
-beforeEach(() => {
-    get.mockClear();
-    gets.mockClear();
-    post.mockClear();
-    put.mockClear();
-    remove.mockClear();
-})
+jest.unmock('..');
 
 describe('getUser', () => {
     test('should request user by id', () => {
-        get.mockReturnValue(Promise.resolve('user account'))
+        mock(get).mockReturnValue(Promise.resolve('user account'))
         const result = getUser(3);
 
         return result.then(res => {
@@ -33,20 +18,20 @@ describe('getUser', () => {
 
 describe('getUsers', () => {
     test('should request users', () => {
-        gets.mockReturnValue(Promise.resolve(['user 1', 'user 2', 'user 3']))
+        mock(get).mockReturnValue(Promise.resolve(['user 1', 'user 2', 'user 3']))
         const result = getUsers();
 
         return result.then(res => {
             expect(res).toStrictEqual(expect.arrayContaining(['user 1', 'user 2', 'user 3']));
-            expect(gets).toHaveBeenCalledWith('users');
+            expect(get).toHaveBeenCalledWith('users');
         })
     })
 });
 
 describe('saveUser', () => {
     test('should create new user', () => {
-        post.mockReturnValue(Promise.resolve(1))
-        put.mockReturnValue(Promise.resolve(2))
+        mock(post).mockReturnValue(Promise.resolve(1))
+        mock(put).mockReturnValue(Promise.resolve(2))
 
         const result = saveUser({ id: 0, name: 'new user' });
 
@@ -58,8 +43,8 @@ describe('saveUser', () => {
     })
 
     test('should update user', () => {
-        post.mockReturnValue(Promise.resolve(1))
-        put.mockReturnValue(Promise.resolve(2))
+        mock(post).mockReturnValue(Promise.resolve(1))
+        mock(put).mockReturnValue(Promise.resolve(2))
 
         const result = saveUser({ id: 2, name: 'user' });
 
@@ -73,7 +58,7 @@ describe('saveUser', () => {
 
 describe('removeUser', () => {
     test('should remove user', () => {
-        remove.mockReturnValue(Promise.resolve())
+        mock(remove).mockReturnValue(Promise.resolve())
 
         const result = removeUser(5);
 
