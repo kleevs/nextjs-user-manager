@@ -39,7 +39,7 @@ export function put<TResult, TData>(uri: string, data: TData): Promise<TResult> 
         login: user.login,
         isActif: user.isActif,
         password: user.password
-    }]));
+    } as UserAccount]));
     return Promise.resolve<TResult>(id as any); 
 }
 
@@ -75,7 +75,7 @@ export function post<TResult, TData>(uri: string, data: TData): Promise<TResult>
         login: stored?.login,
         isActif: user.isActif,
         password: stored?.password
-    }]));
+    } as UserAccount]));
     return Promise.resolve<TResult>(user.id as any); 
 }
 

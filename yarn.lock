@@ -1830,6 +1830,14 @@
   dependencies:
     "@types/istanbul-lib-report" "*"
 
+"@types/jest@27.0.2":
+  version "27.0.2"
+  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-27.0.2.tgz#ac383c4d4aaddd29bbf2b916d8d105c304a5fcd7"
+  integrity sha512-4dRxkS/AFX0c5XW6IPMNOydLn2tEhNhJV7DnYK+0bjoJZ+QTmfucBlihX7aoEsh/ocYtkLC73UbnBXBXIxsULA==
+  dependencies:
+    jest-diff "^27.0.0"
+    pretty-format "^27.0.0"
+
 "@types/jest@^26.0.22":
   version "26.0.23"
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-26.0.23.tgz#a1b7eab3c503b80451d019efb588ec63522ee4e7"
@@ -1923,6 +1931,14 @@
     "@types/prop-types" "*"
     "@types/scheduler" "*"
     csstype "^3.0.2"
+
+"@types/react@16.8.8":
+  version "16.8.8"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.8.8.tgz#4b60a469fd2469f7aa6eaa0f8cfbc51f6d76e662"
+  integrity sha512-xwEvyet96u7WnB96kqY0yY7qxx/pEpU51QeACkKFtrgjjXITQn0oO1iwPEraXVgh10ZFPix7gs1R4OJXF7P5sg==
+  dependencies:
+    "@types/prop-types" "*"
+    csstype "^2.2.0"
 
 "@types/react@^16", "@types/react@^16.8.8", "@types/react@^16.9.53":
   version "16.14.6"
@@ -3688,6 +3704,11 @@ cssstyle@^2.3.0:
   integrity sha512-AZL67abkUzIuvcHqk7c09cezpGNcxUxU4Ioi/05xHk4DQeTkWmGYftIE6ctU6AEt+Gn4n1lDStOtj7FKycP71A==
   dependencies:
     cssom "~0.3.6"
+
+csstype@^2.2.0:
+  version "2.6.19"
+  resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.6.19.tgz#feeb5aae89020bb389e1f63669a5ed490e391caa"
+  integrity sha512-ZVxXaNy28/k3kJg0Fou5MiYpp88j7H9hLZp8PDC3jV0WFjfH5E9xHb56L0W59cPbKbcHXeP4qyT8PrHp8t6LcQ==
 
 csstype@^3.0.2:
   version "3.0.8"
