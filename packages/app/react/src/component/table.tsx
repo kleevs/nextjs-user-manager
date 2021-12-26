@@ -1,5 +1,8 @@
-import { Link, Panel, Table, dateToString, preventDefault, stopPropagation } from "lib";
-import { removeUser } from 'user-manager-business';
+import { dateToString, preventDefault, stopPropagation } from "lib";
+import { removeUser, User } from 'user-manager-business';
+import  Table from "./ux/table";
+import Panel from "./ux/panel";
+import { Link } from "./ux/clickable";
 import React from "react";
 
 export default function List({navigate, users }: {

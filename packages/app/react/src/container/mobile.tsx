@@ -1,4 +1,4 @@
-import { LayoutMobile } from "lib";
+import LayoutMobile from "../component/ux/layout-mobile";
 import { CardsModule } from './list'
 import DetailModule from './detail'
 import React from "react";

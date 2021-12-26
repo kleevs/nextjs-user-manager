@@ -1,3 +1,27 @@
+
+export interface User {
+    readonly id: number;
+    readonly lastName?: string;
+    readonly firstName?: string;
+    readonly birthdate?: Date;
+    readonly login?: string;
+    readonly isActif?: boolean;
+}
+
+export interface Account {
+    readonly password?: string;
+}
+
+export type UserAccount = User & Account;
+
+export interface UserError {
+    readonly lastNameError?: string;
+    readonly firstNameError?: string;
+    readonly birthdateError?: string;
+    readonly loginError?: string;
+    readonly passwordError?: string;
+}
+
 function load(): UserAccount[] {
     const data = localStorage.getItem("users");
     const users: UserAccount[] = data && (JSON.parse(data || '') || []).map(_ => ({..._, birthdate: new Date(_.birthdate)})) || [];

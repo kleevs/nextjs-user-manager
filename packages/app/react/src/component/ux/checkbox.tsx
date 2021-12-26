@@ -6,8 +6,7 @@ const CheckboxCss = () => ``;
 
 export const CheckboxStyled = (styled.input)`${CheckboxCss()}`;
 
-export default () =>
-function Checkbox({checked, onChange}: {
+export default function Checkbox({checked, onChange}: {
     checked: boolean;
     onChange: (v: boolean) => void;
 }) {

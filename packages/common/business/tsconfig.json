@@ -13,10 +13,7 @@
     "target": "es5",
     "jsx": "react",
     "typeRoots": [
-      "./types",
       "node_modules/@types",
-      "../node_modules/@types",
-      "../../node_modules/@types"
     ],
     "lib": [
       "es2016",

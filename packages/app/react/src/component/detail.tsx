@@ -1,5 +1,8 @@
-import { TextField, DateField, Checkbox, preventDefault } from 'lib'
-import { saveUser } from 'user-manager-business';
+import { preventDefault } from 'lib'
+import { saveUser, UserAccount, UserError } from 'user-manager-business';
+import  TextField from "./ux/text-field";
+import DateField from "./ux/date-field";
+import Checkbox from "./ux/checkbox";
 import React from "react";
 
 export default function Detail ({

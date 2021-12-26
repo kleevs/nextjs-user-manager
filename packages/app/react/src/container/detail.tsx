@@ -1,4 +1,4 @@
-import { getUser } from "user-manager-business";
+import { getUser, User, UserError } from "user-manager-business";
 import Detail from '../component/detail'
 import React, { useEffect, useState } from "react";
 

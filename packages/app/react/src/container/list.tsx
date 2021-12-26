@@ -1,4 +1,4 @@
-import { getUsers } from "user-manager-business";
+import { getUsers, User } from "user-manager-business";
 import Table from '../component/table'
 import Card from '../component/cards'
 import React from "react";

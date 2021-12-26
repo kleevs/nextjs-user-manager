@@ -16,8 +16,7 @@ export const Title = (styled.th)`${TitleCss()}`;
 export const Row = (styled.tr)`${RowCss()}`;
 export const Cellule = (styled.td)`${CelluleCss()}`;
 
-export default () => 
-function Table({titles, rows}: {
+export default function Table({titles, rows}: {
     titles: (JSX.Element | string)[];
     rows: (JSX.Element | string)[][];
 }) {

@@ -1,12 +1,7 @@
-import type { stopPropagation } from '../helper/dom'
 import React from 'react';
+import { stopPropagation } from 'lib'
 
-type Deps = {
-    stopPropagation: typeof stopPropagation;
-}
-
-export default ({ stopPropagation }: Deps) => 
-function Card({onRemove, onClick, children}: {
+export default function Card({onRemove, onClick, children}: {
     onRemove: () => void; 
     onClick: () => void; 
     children: unknown

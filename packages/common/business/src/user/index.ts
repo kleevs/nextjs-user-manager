@@ -1,4 +1,5 @@
 import { get, post, put, remove } from "../ajax";
+export { User, Account, UserAccount, UserError } from "../ajax";
 
 const USERS = "users";
 const USER = (id: number) => `users/${id || ''}`;

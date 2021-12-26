@@ -1,6 +1,8 @@
-import type {} from "user-manager-business/types";
-import { Link, Card, Panel, dateToString, preventDefault } from "lib";
-import { removeUser } from 'user-manager-business';
+import { dateToString, preventDefault } from "lib";
+import { removeUser, User } from 'user-manager-business';
+import  Card from "./ux/card";
+import Panel from "./ux/panel";
+import { Link } from "./ux/clickable";
 import React from "react";
 
 export default function Cards({navigate, users}: {

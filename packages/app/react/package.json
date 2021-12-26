@@ -7,7 +7,8 @@
     "build": "tsc"
   },
   "devDependencies": {
-    "@types/node": "^7.0.14",
+    "@types/react": "17.0.5",
+    "@types/react-dom": "17.0.5",
     "@types/styled-components": "5.1.9",
     "typescript": "^3.3.3333"
   },
@@ -15,8 +16,6 @@
   "author": "kleevs",
   "license": "MIT",
   "dependencies": {
-    "@types/react": "^16.8.8",
-    "@types/react-dom": "^16.8.2",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "styled-components": "5.2.1",
