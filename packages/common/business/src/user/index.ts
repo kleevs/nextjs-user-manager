@@ -1,32 +1,83 @@
-import { get, post, put, remove } from "../ajax";
-export { User, Account, UserAccount, UserError } from "../ajax";
+export interface User {
+    readonly id: number;
+    readonly lastName?: string;
+    readonly firstName?: string;
+    readonly birthdate?: Date;
+    readonly login?: string;
+    readonly isActif?: boolean;
+}
 
-const USERS = "users";
-const USER = (id: number) => `users/${id || ''}`;
+export interface Account {
+    readonly password?: string;
+}
 
-export function saveUser<TUser extends { id: number }>(user: TUser) { 
-    return (!!user.id && 
-        put(USER(user.id), user) || 
-        post(USERS, user))
-        .catch((errors: {code: string; message: string;}[]) => { 
-            throw {
-                lastNameError: errors.filter(_ => _.code === 'LSTN').map(_ => _.message)[0],
-                firstNameError: errors.filter(_ => _.code === 'FRSN').map(_ => _.message)[0],
-                birthdateError: errors.filter(_ => _.code === 'BIRTH').map(_ => _.message)[0],
-                loginError: errors.filter(_ => _.code === 'LGN').map(_ => _.message)[0],
-                passwordError: errors.filter(_ => _.code === 'PSSW').map(_ => _.message)[0]
-            }
-        });
+export type UserAccount = User & Account;
+
+export interface UserError {
+    readonly lastNameError?: string;
+    readonly firstNameError?: string;
+    readonly birthdateError?: string;
+    readonly loginError?: string;
+    readonly passwordError?: string;
+}
+
+function load(): UserAccount[] {
+    const data = localStorage.getItem("users");
+    const users: UserAccount[] = data && (JSON.parse(data || '') || []).map(_ => ({..._, birthdate: new Date(_.birthdate)})) || [];
+    return users;
+}
+
+function save(users: UserAccount[]) {
+    localStorage.setItem("users", JSON.stringify(users));
+}
+
+export function saveUser(user: UserAccount) { 
+    let errors: UserError = {};
+    if (!user.password) {
+        errors = { ...errors, passwordError: 'Renseigner un mot de passe' };
+    }
+    if (!user.login) {
+        errors = { ...errors, loginError: 'Renseigner un login' };
+    }
+    if (!user.birthdate) {
+        errors = { ...errors, birthdateError: 'Date de naissance invalide' };
+    }
+    if (!user.lastName) {
+        errors = { ...errors, lastNameError: 'Renseigner un nom de famille' };
+    }
+    if (!user.firstName) {
+        errors = { ...errors, firstNameError: 'Renseigner un prénom' };
+    }
+    if (errors != {}) {
+        return Promise.reject(errors);
+    }
+
+    const users = load();
+    const stored = users.filter(_ => _.id === user.id)[0];
+    const result = users.filter(_ => _.id !== user.id).concat([{
+        id: user.id,
+        lastName: user.lastName,
+        firstName: user.firstName,
+        birthdate: user.birthdate,
+        login: stored?.login || user.login,
+        isActif: user.isActif,
+        password: stored?.password || user.password
+    }]);
+    save(result);
 }
 
 export function removeUser(id: number) {
-    return remove(USER(id));
+    const users = load();
+    const result = users.filter(_ => _.id !== id);
+    save(result);
 }
 
-export function getUsers<TUser>() { 
-    return get<TUser[]>(USERS); 
+export function getUsers() { 
+    return load();
+
 }
 
-export function getUser<TUser>(id: number) { 
-    return get<TUser>(USER(id)); 
+export function getUser(id: number) { 
+    const users = load();
+    return users.filter(_ => _.id === id)[0];
 }
