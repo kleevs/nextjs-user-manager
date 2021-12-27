@@ -1,9 +1,11 @@
 import { preventDefault } from 'lib'
 import { saveUser, UserAccount, UserError } from 'user-manager-business';
-import  TextField from "./ux/text-field";
-import DateField from "./ux/date-field";
-import Checkbox from "./ux/checkbox";
+import  TextField from "./text-field";
+import DateField from "./date-field";
 import React from "react";
+import styled from 'styled-components';
+
+export const Checkbox = styled.input``;
 
 export default function Detail ({
     navigate,
@@ -30,7 +32,7 @@ export default function Detail ({
                     onChange={(login) => (onChange({...model, login}), setErrors({...errors, loginError: ''}))} />
                 <TextField label='Mot de passe' error={errors.passwordError} value={model.password} 
                     onChange={(password) => (onChange({...model, password}), setErrors({...errors, passwordError: ''}))} />
-                <Checkbox checked={model.isActif} onChange={(isActif) => onChange({...model, isActif})} />
+                <Checkbox checked={model.isActif} onChange={(e) => onChange({...model, isActif: e.target.checked})} />
                 <button type="submit" className="btn btn-primary full-width" data-content="Enregistrer l'utilisateur">Enregistrer</button>
             </form>
         </div>

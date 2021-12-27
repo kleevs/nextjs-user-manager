@@ -2,7 +2,7 @@ import { getUser, User, UserError } from "user-manager-business";
 import Detail from '../component/detail'
 import React, { useEffect, useState } from "react";
 
-export default function DetailModule({id, navigate}: {
+export function DetailModule({id, navigate}: {
     id: number;
     navigate: (href: string) => void;
 }) {

@@ -1,9 +1,10 @@
-import { dateToString, preventDefault } from "lib";
+import { dateToString, preventDefault, stopPropagation } from "lib";
 import { removeUser, User } from 'user-manager-business';
-import  Card from "./ux/card";
-import Panel from "./ux/panel";
-import { Link } from "./ux/clickable";
+import Panel from "./panel";
+import styled from 'styled-components';
 import React from "react";
+
+const Link = styled.a``
 
 export default function Cards({navigate, users}: {
     navigate: (location: string) => void;
@@ -11,14 +12,12 @@ export default function Cards({navigate, users}: {
 }) {
     return <Panel title='Liste des utilisateurs'>
         <Link href="/users" onClick={(e) => preventDefault(e, () => navigate('/users'))}>Nouvel utilisateur</Link>
-        {users.map((_,i) => <Card key={i} 
-            onRemove={() => removeUser(_.id).then(() => navigate('/'))}
-            onClick={() => navigate(`/users/${_.id}`)}
-        >
-            <div>{_.lastName} {_.lastName}</div>
+        {users.map((_,i) => <div key={i} onClick={() => navigate(`/users/${_.id}`)}>
+        <button onClick={(e) => stopPropagation(e, () => removeUser(_.id).then(() => navigate('/')))}>Supprimer</button>
+        <div>{_.lastName} {_.lastName}</div>
             <div>{dateToString(_.birthdate, '')}</div>
             <div>{_.login}</div>
             <div>{_.isActif ? 'actif' : 'inactif'}</div>
-        </Card>)}
+        </div>)}
     </Panel>
 }
