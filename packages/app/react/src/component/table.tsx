@@ -1,8 +1,7 @@
 import { dateToString, preventDefault, stopPropagation } from "lib";
 import { removeUser, User } from 'user-manager-business';
 import styled from 'styled-components';
-import Panel from "./panel";
-import React from "react";
+import React, { useCallback } from "react";
 
 const TableStyled = (styled.table)``;
 const Header = (styled.thead)``;
@@ -15,24 +14,33 @@ export default function List({navigate, users }: {
     navigate: (location: string) => void;
     users: User[];
 }) {
-    return <Panel title='Liste des utilisateurs'>
-        <TableStyled>
-            <Header> 
-                <Row> 
-                    {['Nom', 'Prénom', 'Date de naissance', 'Login', 'Actif', ''].map((_, i) => <Cellule key={i}>{_}</Cellule>)}
-                </Row>
-            </Header> 
-            <Body>
-                {users.map((_,i) => <Row key={i}>
-                    <Cellule>{_.lastName}</Cellule>
-                    <Cellule>{_.firstName}</Cellule>
-                    <Cellule>{dateToString(_.birthdate, '')}</Cellule>
-                    <Cellule>{_.login}</Cellule>
-                    <Cellule>{_.isActif ? 'actif' : 'inactif'}</Cellule>
-                    <Cellule><Link onClick={(e) => stopPropagation(e, () => removeUser(_.id).then(() => navigate('/')))} /></Cellule>        
-                </Row>)}
-            </Body>
-        </TableStyled>
-        <Link href="/users" onClick={(e) => preventDefault(e, () => navigate('/users'))}>Nouvel utilisateur</Link>
-    </Panel>
+    const remove = useCallback((id: number) => {
+        removeUser(id); 
+        navigate('/');
+    }, []);
+
+    return <div> 
+        <h1>Liste des utilisateurs</h1> 
+        <hr/>
+        <div>
+            <TableStyled>
+                <Header> 
+                    <Row> 
+                        {['Nom', 'Prénom', 'Date de naissance', 'Login', 'Actif', ''].map((_, i) => <Cellule key={i}>{_}</Cellule>)}
+                    </Row>
+                </Header> 
+                <Body>
+                    {users.map((_,i) => <Row key={i}>
+                        <Cellule>{_.lastName}</Cellule>
+                        <Cellule>{_.firstName}</Cellule>
+                        <Cellule>{dateToString(_.birthdate, '')}</Cellule>
+                        <Cellule>{_.login}</Cellule>
+                        <Cellule>{_.isActif ? 'actif' : 'inactif'}</Cellule>
+                        <Cellule><Link onClick={(e) => stopPropagation(e, () => remove(_.id))} /></Cellule>        
+                    </Row>)}
+                </Body>
+            </TableStyled>
+            <Link href="/users" onClick={(e) => preventDefault(e, () => navigate('/users'))}>Nouvel utilisateur</Link>
+        </div>
+    </div>
 }

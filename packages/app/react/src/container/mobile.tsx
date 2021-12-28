@@ -44,7 +44,7 @@ export function MobileModule({page, id, navigate}: {
     const onClose = () => navigate('/');
 
     return <Container>
-        {open && <Overlay onClick={() => onClose()}/>}
+        {sidebarOpen && <Overlay onClick={() => onClose()}/>}
         <Block open={sidebarOpen}>
             <DetailModule id={id} navigate={navigate} />
         </Block>

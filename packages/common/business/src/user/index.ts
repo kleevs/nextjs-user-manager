@@ -21,14 +21,16 @@ export interface UserError {
     readonly passwordError?: string;
 }
 
+const store = typeof localStorage !== 'undefined' && localStorage || null;
+
 function load(): UserAccount[] {
-    const data = localStorage.getItem("users");
+    const data = store?.getItem("users");
     const users: UserAccount[] = data && (JSON.parse(data || '') || []).map(_ => ({..._, birthdate: new Date(_.birthdate)})) || [];
     return users;
 }
 
 function save(users: UserAccount[]) {
-    localStorage.setItem("users", JSON.stringify(users));
+    store?.setItem("users", JSON.stringify(users));
 }
 
 export function saveUser(user: UserAccount) { 
@@ -48,14 +50,18 @@ export function saveUser(user: UserAccount) {
     if (!user.firstName) {
         errors = { ...errors, firstNameError: 'Renseigner un prénom' };
     }
-    if (errors != {}) {
-        return Promise.reject(errors);
+    if (
+        errors.passwordError || errors.lastNameError || errors.birthdateError ||
+        errors.firstNameError || errors.loginError
+    ) {
+        throw errors;
     }
 
     const users = load();
     const stored = users.filter(_ => _.id === user.id)[0];
+    const id = stored?.id ||  Math.max(...users.map(_ => _.id), 0) + 1;
     const result = users.filter(_ => _.id !== user.id).concat([{
-        id: user.id,
+        id: id,
         lastName: user.lastName,
         firstName: user.firstName,
         birthdate: user.birthdate,
@@ -64,6 +70,8 @@ export function saveUser(user: UserAccount) {
         password: stored?.password || user.password
     }]);
     save(result);
+
+    return id;
 }
 
 export function removeUser(id: number) {

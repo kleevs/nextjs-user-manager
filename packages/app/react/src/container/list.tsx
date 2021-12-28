@@ -1,19 +1,18 @@
-import { getUsers, User } from "user-manager-business";
+import { getUsers } from "user-manager-business";
 import Table from '../component/table'
 import Card from '../component/cards'
-import React from "react";
-import { useAsync } from "../hook/use-async";
+import React, { useMemo } from "react";
 
 export function ListModule({navigate}: {
     navigate: (href: string) => void;
 }) {
-    const users = useAsync(() => getUsers<User>(), [], []);
+    const users = useMemo(() => getUsers(), []);
     return <Table navigate={navigate} users={users} />
 }
 
 export function CardsModule({navigate}: {
     navigate: (href: string) => void;
 }) {
-    const users = useAsync(() => getUsers<User>(), [], []);
+    const users = useMemo(() => getUsers(), []);
     return <Card navigate={navigate} users={users} />
 }

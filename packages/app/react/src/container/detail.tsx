@@ -10,7 +10,7 @@ export function DetailModule({id, navigate}: {
     const [errors, setErrors] = useState<UserError>({});
 
     useEffect(() => {
-        id && getUser(id).then(onChange) || onChange({ id });
+        id ? onChange(getUser(id)) : onChange({ id });
     }, [id])
 
     return <Detail navigate={navigate} model={user} onChange={onChange} errors={errors} setErrors={setErrors}/>
