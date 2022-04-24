@@ -1,8 +1,8 @@
-import { CardsModule } from './list'
+import Card from '../common/cards'
 import { DetailModule } from './detail'
-import React from "react";
-
+import React, { useMemo } from "react";
 import styled from "styled-components";
+import { getUsers, createListPageData } from 'user-manager-business';
 
 const Container = styled.div`
     position: relative;
@@ -40,7 +40,9 @@ export function MobileModule({page, id, navigate}: {
     id: number;
     navigate: (href: string) => void;
 }) {
+    const pageData = useMemo(createListPageData, []);
     const sidebarOpen = page === Page.Detail;
+    const users = useMemo(() => getUsers(pageData), []);
     const onClose = () => navigate('/');
 
     return <Container>
@@ -48,6 +50,6 @@ export function MobileModule({page, id, navigate}: {
         <Block open={sidebarOpen}>
             <DetailModule id={id} navigate={navigate} />
         </Block>
-        <CardsModule navigate={navigate} />
+        <Card users={users} navigate={navigate} />
     </Container>
 }

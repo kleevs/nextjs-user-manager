@@ -1,3 +1,3 @@
-export * from './container/detail'
-export * from './container/list'
-export * from './container/mobile'
+export * from './pages/detail'
+export * from './pages/list'
+export * from './pages/mobile'

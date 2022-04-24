@@ -14,7 +14,7 @@ export default function TextField({value, error, label, onChange}: {
 }) {
     return <>
         <label>{label}</label>
-        <Input value={value} onChange={(e) => onChange(e.target.value)} />
+        <Input value={value || ''} onChange={(e) => onChange(e.target.value)} />
         {error || <></>}
     </>
 }

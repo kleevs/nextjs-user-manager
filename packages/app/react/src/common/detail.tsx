@@ -1,5 +1,5 @@
 import { preventDefault } from 'lib'
-import { saveUser, UserAccount, UserError } from 'user-manager-business';
+import { UserAccount, UserError } from 'user-manager-business';
 import  TextField from "./text-field";
 import DateField from "./date-field";
 import React, { useCallback } from "react";
@@ -8,7 +8,7 @@ import styled from 'styled-components';
 export const Checkbox = styled.input``;
 
 export default function Detail ({
-    navigate,
+    navigate, saveUser,
     model, errors, onChange, setErrors
 }: {
     navigate: (location: string) => void;
@@ -16,6 +16,7 @@ export default function Detail ({
     onChange: (v: UserAccount) => void;
     errors: UserError;
     setErrors: (v: UserError) => void;
+    saveUser: (user: UserAccount) => void;
 }) {
     const save = useCallback(() => {
         try {
@@ -42,7 +43,7 @@ export default function Detail ({
                     onChange={(login) => (onChange({...model, login}), setErrors({...errors, loginError: ''}))} />
                 <TextField label='Mot de passe' error={errors.passwordError} value={model.password} 
                     onChange={(password) => (onChange({...model, password}), setErrors({...errors, passwordError: ''}))} />
-                <Checkbox type='checkbox' checked={model.isActif} onChange={(e) => onChange({...model, isActif: e.target.checked})} />
+                <Checkbox type='checkbox' value="actif" checked={model.isActif} onChange={(e) => onChange({...model, isActif: e.target.checked})} />
                 <button type="submit" className="btn btn-primary full-width" data-content="Enregistrer l'utilisateur">Enregistrer</button>
             </form>
         </div>

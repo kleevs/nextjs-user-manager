@@ -23,17 +23,22 @@ export interface UserError {
 
 const store = typeof localStorage !== 'undefined' && localStorage || null;
 
-function load(): UserAccount[] {
-    const data = store?.getItem("users");
-    const users: UserAccount[] = data && (JSON.parse(data || '') || []).map(_ => ({..._, birthdate: new Date(_.birthdate)})) || [];
-    return users;
+// function load(): UserAccount[] {
+//     const data = store?.getItem("users");
+//     const users: UserAccount[] = data && (JSON.parse(data || '') || []).map(_ => ({..._, birthdate: new Date(_.birthdate)})) || [];
+//     return users;
+// }
+
+// function save(users: UserAccount[]) {
+//     store?.setItem("users", JSON.stringify(users));
+// }
+
+export type UsersStore = {
+    getUsers: () => UserAccount[];
+    saveUsers: (users: UserAccount[]) => void;
 }
 
-function save(users: UserAccount[]) {
-    store?.setItem("users", JSON.stringify(users));
-}
-
-export function saveUser(user: UserAccount) { 
+export function saveUser(store: UsersStore, user: UserAccount) { 
     let errors: UserError = {};
     if (!user.password) {
         errors = { ...errors, passwordError: 'Renseigner un mot de passe' };
@@ -57,7 +62,7 @@ export function saveUser(user: UserAccount) {
         throw errors;
     }
 
-    const users = load();
+    const users = store.getUsers();
     const stored = users.filter(_ => _.id === user.id)[0];
     const id = stored?.id ||  Math.max(...users.map(_ => _.id), 0) + 1;
     const result = users.filter(_ => _.id !== user.id).concat([{
@@ -69,23 +74,22 @@ export function saveUser(user: UserAccount) {
         isActif: user.isActif,
         password: stored?.password || user.password
     }]);
-    save(result);
+    store.saveUsers(result);
 
     return id;
 }
 
-export function removeUser(id: number) {
-    const users = load();
+export function removeUser(store: UsersStore, id: number) {
+    const users = store.getUsers();
     const result = users.filter(_ => _.id !== id);
-    save(result);
+    store.saveUsers(result);
 }
 
-export function getUsers() { 
-    return load();
-
+export function getUsers(store: UsersStore) { 
+    return store.getUsers();
 }
 
-export function getUser(id: number) { 
-    const users = load();
+export function getUser(store: UsersStore, id: number) { 
+    const users = store.getUsers();
     return users.filter(_ => _.id === id)[0];
 }
