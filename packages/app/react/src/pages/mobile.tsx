@@ -1,8 +1,9 @@
 import Card from '../common/cards'
 import { DetailModule } from './detail'
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import styled from "styled-components";
-import { getUsers, createListPageData } from 'user-manager-business';
+import { createListPageData, initialize } from 'user-manager-business';
+import { useSelector } from 'src/hooks/use-selector';
 
 const Container = styled.div`
     position: relative;
@@ -42,8 +43,9 @@ export function MobileModule({page, id, navigate}: {
 }) {
     const pageData = useMemo(createListPageData, []);
     const sidebarOpen = page === Page.Detail;
-    const users = useMemo(() => getUsers(pageData), []);
+    const users = useSelector(pageData.store, ({ users }) => users); 
     const onClose = () => navigate('/');
+    useEffect(() => initialize(pageData.store), [pageData.store])
 
     return <Container>
         {sidebarOpen && <Overlay onClick={() => onClose()}/>}

@@ -1,2 +1,2 @@
-export * from './user';
-export * from './page-data';
+export * from './pages/list';
+export * from './pages/list/type';
