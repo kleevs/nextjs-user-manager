@@ -1,4 +1,5 @@
-import { moveOnDetail, DetailLocation, PageListData, removeUser } from "user-manager-business";
+import { PageListData, removeUser } from "list-page";
+import { moveOnDetail, DetailLocation } from "common-page";
 import React from "react";
 import { useSelector } from "../hooks/use-selector";
 import { dateToString, preventDefault, stopPropagation, Store } from "lib";

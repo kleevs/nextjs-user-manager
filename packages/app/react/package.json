@@ -19,7 +19,8 @@
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "styled-components": "5.2.1",
-    "user-manager-business": "^0.0.1",
+    "list-page": "^0.0.1",
+    "detail-page": "^0.0.1",
     "lib": "^0.0.1"
   }
 }

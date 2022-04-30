@@ -1,7 +1,9 @@
 import { DetailModule } from './detail'
 import React, { useCallback } from "react";
 import styled from "styled-components";
-import { moveOnDetail, moveOnHome, PageListData, removeUser } from 'user-manager-business';
+import { moveOnDetail, moveOnHome } from 'common-page';
+import { PageListData, removeUser } from 'list-page';
+import { PageDetailData } from 'detail-page';
 import { useSelector } from '../hooks/use-selector';
 import { dateToString, preventDefault, stopPropagation, Store } from "lib";
 
@@ -33,9 +35,8 @@ const Block = styled.div`
     `}
 `;
 
-export function MobileModule({pageData, id }: {
-    pageData: Store<PageListData>;
-    id: number;
+export function MobileModule({pageData }: {
+    pageData: Store<PageListData & PageDetailData>;
 }) {
     const sidebarOpen = useSelector(pageData, ({ href }) => href?.startsWith('/users') || false); 
     const users = useSelector(pageData, ({ users }) => users); 
@@ -46,7 +47,7 @@ export function MobileModule({pageData, id }: {
     return <Container>
         {sidebarOpen && <Overlay onClick={() => moveOnHome(pageData)}/>}
         <Block open={sidebarOpen}>
-            <DetailModule pageData={pageData} id={id} />
+            <DetailModule pageData={pageData} />
         </Block>
         <div> 
             <h1>Liste des utilisateurs</h1> 

@@ -1,4 +1,4 @@
-import { UserAccount } from "../common/type";
+import { UserAccount, PageData } from "common-page";
 
 export interface UserError {
     readonly lastNameError?: string;
@@ -8,7 +8,6 @@ export interface UserError {
     readonly passwordError?: string;
 }
 
-export type PageDetailData = {
-    href: string;
-    users: UserAccount[];
+export type PageDetailData = PageData & {
+    user: UserAccount;
 }

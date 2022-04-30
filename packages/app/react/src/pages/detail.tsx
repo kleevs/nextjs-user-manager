@@ -1,17 +1,18 @@
-import { moveOnDetail, PageListData, saveUser, UserAccount, UserError } from "user-manager-business";
-import React, { useMemo, useState, useCallback } from "react";
+import { PageDetailData, saveUser, UserError } from "detail-page";
+import { moveOnDetail, UserAccount } from "common-page";
+import React, { useState, useCallback } from "react";
 import { preventDefault, Store } from 'lib'
 import  TextField from "../common/text-field";
 import DateField from "../common/date-field";
 import styled from 'styled-components';
+import { useSelector } from "../hooks/use-selector";
 
 export const Checkbox = styled.input``;
 
-export function DetailModule({id, pageData}: {
-    pageData: Store<PageListData>;
-    id: number;
+export function DetailModule({ pageData }: {
+    pageData: Store<PageDetailData>;
 }) {
-    const userInit = useMemo(() => pageData.getValue()?.users.find(u => u.id === id), [pageData, id])
+    const userInit = useSelector(pageData, ({ user }) => user)
     const [user, onChange] = useState<UserAccount>(() => userInit || { id: 0 });
     const [errors, setErrors] = useState<UserError>({});
     const save = useCallback(() => {

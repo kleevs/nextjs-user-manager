@@ -1,6 +1,6 @@
 import { UserError, PageDetailData } from "./type";
 import { Store } from 'lib';
-import { UserAccount } from "../common/type";
+import { UserAccount } from "common-page";
 
 export function saveUser(store: Store<PageDetailData>, user: UserAccount) { 
     let errors: UserError = {};
@@ -26,10 +26,9 @@ export function saveUser(store: Store<PageDetailData>, user: UserAccount) {
         throw errors;
     }
 
-    const { users } = store.getValue();
-    const stored = users.filter(_ => _.id === user.id)[0];
-    const id = stored?.id ||  Math.max(...users.map(_ => _.id), 0) + 1;
-    const result = users.filter(_ => _.id !== user.id).concat([{
+    const { user: stored } = store.getValue();
+    const id = stored?.id ||  Math.random() * 1000 + new Date().getTime();
+    const result = {
         id: id,
         lastName: user.lastName,
         firstName: user.firstName,
@@ -37,8 +36,8 @@ export function saveUser(store: Store<PageDetailData>, user: UserAccount) {
         login: stored?.login || user.login,
         isActif: user.isActif,
         password: stored?.password || user.password
-    }]);
-    store.update({...store.getValue(), users: result, href: `/users/${id}` });
+    };
+    store.update({...store.getValue(), user: result, href: `/users/${id}` });
 
     return id;
 }
