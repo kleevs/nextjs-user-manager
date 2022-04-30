@@ -2,7 +2,7 @@
   "name": "user-manager-business",
   "version": "0.0.1",
   "description": "",
-  "main": "dist/index.js",
+  "main": "dist",
   "scripts": {
     "build": "tsc"
   },

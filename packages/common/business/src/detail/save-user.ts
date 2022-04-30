@@ -1,6 +1,8 @@
-import { UserAccount, UserError, Store, PageListData } from "./type";
+import { UserError, PageDetailData } from "./type";
+import { Store } from 'lib';
+import { UserAccount } from "../common/type";
 
-export function saveUser(store: Store<PageListData>, user: UserAccount) { 
+export function saveUser(store: Store<PageDetailData>, user: UserAccount) { 
     let errors: UserError = {};
     if (!user.password) {
         errors = { ...errors, passwordError: 'Renseigner un mot de passe' };
@@ -36,13 +38,7 @@ export function saveUser(store: Store<PageListData>, user: UserAccount) {
         isActif: user.isActif,
         password: stored?.password || user.password
     }]);
-    store.update({...store.getValue(), users: result });
+    store.update({...store.getValue(), users: result, href: `/users/${id}` });
 
     return id;
-}
-
-export function removeUser(store: Store<PageListData>, id: number) {
-    const { users } = store.getValue();
-    const result = users.filter(_ => _.id !== id);
-    store.update({...store.getValue(), users: result });
 }

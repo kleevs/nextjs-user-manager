@@ -1,14 +1,16 @@
-import Card from '../common/cards'
 import { DetailModule } from './detail'
-import React, { useEffect, useMemo } from "react";
+import React, { useCallback } from "react";
 import styled from "styled-components";
-import { createListPageData, initialize } from 'user-manager-business';
-import { useSelector } from 'src/hooks/use-selector';
+import { moveOnDetail, moveOnHome, PageListData, removeUser } from 'user-manager-business';
+import { useSelector } from '../hooks/use-selector';
+import { dateToString, preventDefault, stopPropagation, Store } from "lib";
 
 const Container = styled.div`
     position: relative;
     height: 100%;
 `;
+
+const Link = styled.a``
 
 const Overlay = styled.div`
     position: absolute;
@@ -31,27 +33,34 @@ const Block = styled.div`
     `}
 `;
 
-export enum Page {
-    List = 1,
-    Detail
-} 
-
-export function MobileModule({page, id, navigate}: {
-    page: Page;
+export function MobileModule({pageData, id }: {
+    pageData: Store<PageListData>;
     id: number;
-    navigate: (href: string) => void;
 }) {
-    const pageData = useMemo(createListPageData, []);
-    const sidebarOpen = page === Page.Detail;
-    const users = useSelector(pageData.store, ({ users }) => users); 
-    const onClose = () => navigate('/');
-    useEffect(() => initialize(pageData.store), [pageData.store])
+    const sidebarOpen = useSelector(pageData, ({ href }) => href?.startsWith('/users') || false); 
+    const users = useSelector(pageData, ({ users }) => users); 
+    const remove = useCallback((id: number) => {
+        removeUser(pageData, id); 
+    }, [pageData]);
 
     return <Container>
-        {sidebarOpen && <Overlay onClick={() => onClose()}/>}
+        {sidebarOpen && <Overlay onClick={() => moveOnHome(pageData)}/>}
         <Block open={sidebarOpen}>
-            <DetailModule id={id} navigate={navigate} />
+            <DetailModule pageData={pageData} id={id} />
         </Block>
-        <Card users={users} navigate={navigate} />
+        <div> 
+            <h1>Liste des utilisateurs</h1> 
+            <hr/>
+            <div>
+                <Link href="/users" onClick={(e) => preventDefault(e, () => moveOnDetail(pageData, null))}>Nouvel utilisateur</Link>
+                {users.map((_,i) => <div key={i} onClick={() => moveOnDetail(pageData, _.id)}>
+                    <button onClick={(e) => stopPropagation(e, () => remove(_.id))}>Supprimer</button>
+                    <div>{_.lastName} {_.lastName}</div>
+                    <div>{dateToString(_.birthdate, '')}</div>
+                    <div>{_.login}</div>
+                    <div>{_.isActif ? 'actif' : 'inactif'}</div>
+                </div>)}
+            </div>
+        </div>
     </Container>
 }
