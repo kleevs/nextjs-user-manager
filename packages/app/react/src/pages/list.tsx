@@ -2,7 +2,7 @@ import { PageListData, removeUser } from "list-page";
 import { moveOnDetail, DetailLocation } from "common-page";
 import React from "react";
 import { useSelector } from "../hooks/use-selector";
-import { dateToString, preventDefault, stopPropagation, Store } from "lib";
+import { dateToString, preventDefault, stopPropagationAndPreventDefault, Store } from "lib";
 import styled from 'styled-components';
 
 const TableStyled = (styled.table)``;
@@ -10,7 +10,9 @@ const Header = (styled.thead)``;
 const Body = (styled.tbody)``;
 const Row = (styled.tr)``;
 const Cellule = (styled.td)``;
-const Link = styled.a``
+const Link = styled.a`
+    cursor: pointer;
+`
 
 export function ListModule({pageData}: {
     pageData: Store<PageListData>;
@@ -34,7 +36,8 @@ export function ListModule({pageData}: {
                         <Cellule>{dateToString(_.birthdate, '')}</Cellule>
                         <Cellule>{_.login}</Cellule>
                         <Cellule>{_.isActif ? 'actif' : 'inactif'}</Cellule>
-                        <Cellule><Link onClick={(e) => stopPropagation(e, () => removeUser(pageData, _.id))} /></Cellule>        
+                        <Cellule><Link href={DetailLocation(_.id)} onClick={(e) => stopPropagationAndPreventDefault(e, () => moveOnDetail(pageData, _.id))}>Modifier</Link></Cellule>        
+                        <Cellule><Link onClick={(e) => stopPropagationAndPreventDefault(e, () => removeUser(pageData, _.id))}>X</Link></Cellule>        
                     </Row>)}
                 </Body>
             </TableStyled>

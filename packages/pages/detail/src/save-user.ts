@@ -1,6 +1,6 @@
 import { UserError, PageDetailData } from "./type";
 import { Store } from 'lib';
-import { UserAccount } from "common-page";
+import { UserAccount, DetailLocation } from "common-page";
 
 export function saveUser(store: Store<PageDetailData>, user: UserAccount) { 
     let errors: UserError = {};
@@ -37,7 +37,7 @@ export function saveUser(store: Store<PageDetailData>, user: UserAccount) {
         isActif: user.isActif,
         password: stored?.password || user.password
     };
-    store.update({...store.getValue(), user: result, href: `/users/${id}` });
+    store.update({...store.getValue(), user: result, href: DetailLocation(id) });
 
     return id;
 }

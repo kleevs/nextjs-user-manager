@@ -7,3 +7,9 @@ export function stopPropagation(e, callback: () => void) {
     e.stopPropagation();
     callback();
 }
+
+export function stopPropagationAndPreventDefault(e, callback: () => void) {
+    e.stopPropagation();
+    e.preventDefault();
+    callback();
+}
