@@ -1,5 +1,5 @@
 import { PageDetailData, saveUser, UserError } from "detail-page";
-import { moveOnDetail, UserAccount } from "common-page";
+import { UserAccount } from "common-page";
 import React, { useState, useCallback } from "react";
 import { preventDefault, Store } from 'lib'
 import  TextField from "../common/text-field";
@@ -15,10 +15,9 @@ export function DetailModule({ pageData }: {
     const userInit = useSelector(pageData, ({ user }) => user)
     const [user, onChange] = useState<UserAccount>(() => userInit || { id: 0 });
     const [errors, setErrors] = useState<UserError>({});
-    const save = useCallback(() => {
+    const save = useCallback(async () => {
         try {
-            const id = saveUser(pageData, user);
-            moveOnDetail(pageData, id);
+            await saveUser(pageData, user);
         }
         catch (e) {
             setErrors(e);

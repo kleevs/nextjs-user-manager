@@ -1,8 +1,8 @@
 import { UserError, PageDetailData } from "./type";
-import { Store } from 'lib';
+import { get, post, Store } from 'lib';
 import { UserAccount, DetailLocation } from "common-page";
 
-export function saveUser(store: Store<PageDetailData>, user: UserAccount) { 
+export async function saveUser(store: Store<PageDetailData>, user: UserAccount) { 
     let errors: UserError = {};
     if (!user.password) {
         errors = { ...errors, passwordError: 'Renseigner un mot de passe' };
@@ -27,9 +27,8 @@ export function saveUser(store: Store<PageDetailData>, user: UserAccount) {
     }
 
     const { user: stored } = store.getValue();
-    const id = stored?.id ||  Math.random() * 1000 + new Date().getTime();
     const result = {
-        id: id,
+        id: stored?.id || 0,
         lastName: user.lastName,
         firstName: user.firstName,
         birthdate: user.birthdate,
@@ -37,7 +36,10 @@ export function saveUser(store: Store<PageDetailData>, user: UserAccount) {
         isActif: user.isActif,
         password: stored?.password || user.password
     };
-    store.update({...store.getValue(), user: result, href: DetailLocation(id) });
+
+    const id = await post<number, UserAccount>(`/api/users/${result.id}`, result);
+    const newValue = await get<UserAccount>(`/api/users/${id}`);
+    store.update({...store.getValue(), user: newValue, href: DetailLocation(id) });
 
     return id;
 }

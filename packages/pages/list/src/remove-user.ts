@@ -1,9 +1,10 @@
-import { HomeLocation } from "common-page";
-import { Store } from "lib";
+import { HomeLocation, UserAccount } from "common-page";
+import { remove, get, Store } from "lib";
 import { PageListData } from "./type";
 
-export function removeUser(store: Store<PageListData>, id: number) {
-    const { users } = store.getValue();
-    const result = users.filter(_ => _.id !== id);
+export async function removeUser(store: Store<PageListData>, id: number) {
+    await remove(`/api/users/${id}`);
+    const result = await get<UserAccount[]>('/api/users');
+
     store.update({...store.getValue(), users: result, href: HomeLocation });
 }
