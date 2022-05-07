@@ -1,6 +1,7 @@
-import { PageListData, removeUser, moveOnDetail, DetailLocation } from "user-manager";
+import { PageListData, removeUser } from '../actions';
+import { moveOnDetail, DetailLocation } from '../../common';
 import React from "react";
-import { useSelector } from "../hooks/use-selector";
+import { useSelector } from "../../common";
 import { dateToString, preventDefault, stopPropagationAndPreventDefault, Store } from "lib";
 import styled from 'styled-components';
 

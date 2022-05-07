@@ -1,5 +1,5 @@
 import { Store, Updater } from "lib";
-import { PageData } from "./type";
+import { PageData } from "../type";
 
 export const HomeLocation = '/'; 
 export function moveOnHome<T>(store: Store<T> & Updater<PageData>) {

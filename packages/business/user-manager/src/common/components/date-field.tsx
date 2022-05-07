@@ -1,14 +1,10 @@
 import { dateToString, parseDate } from 'lib';
 import React, { useState } from 'react'
-
 import styled from 'styled-components';
 
-const InputCss = () => ``;
+const Input = styled.input``;
 
-export const Input = (styled.input)`${InputCss()}`;
-
-
-export default function DateField({label, error, value, onChange}: {
+export function DateField({label, error, value, onChange}: {
     label: string; 
     error: string;
     value: Date;

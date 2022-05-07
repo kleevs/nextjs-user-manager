@@ -1,6 +1,6 @@
-import { UserError, PageDetailData } from "./type";
+import { UserError, PageDetailData } from "../type";
 import { get, post, Store } from 'lib';
-import { UserAccount, DetailLocation } from "../common";
+import { UserAccount, DetailLocation } from "../../common/actions";
 
 export async function saveUser(store: Store<PageDetailData>, user: UserAccount) { 
     let errors: UserError = {};

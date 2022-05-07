@@ -26,8 +26,9 @@
     "next": "9.5.3",
     "numeral": "^2.0.6",
     "toastr": "^2.1.4",
-    "component": "^0.0.1",
-    "react": "17.0.1"
+    "user-manager": "^0.0.1",
+    "react": "17.0.1",
+    "react-dom": "17.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.13.10",

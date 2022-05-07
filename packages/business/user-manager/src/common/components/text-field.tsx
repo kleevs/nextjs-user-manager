@@ -1,11 +1,9 @@
 import React from 'react'
 import styled from 'styled-components';
 
-const InputCss = () => ``;
+const Input = styled.input``;
 
-export const Input = (styled.input)`${InputCss()}`;
-
-export default function TextField({value, error, label, onChange}: {
+export function TextField({value, error, label, onChange}: {
     label: string; 
     error: string;
     value: string;

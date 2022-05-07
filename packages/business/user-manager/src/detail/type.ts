@@ -1,4 +1,4 @@
-import { UserAccount, PageData } from "../common";
+import { UserAccount, PageData } from "../common/actions";
 
 export interface UserError {
     readonly lastNameError?: string;

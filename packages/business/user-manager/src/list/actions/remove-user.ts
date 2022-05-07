@@ -1,6 +1,6 @@
-import { HomeLocation, UserAccount } from "../common";
+import { HomeLocation, UserAccount } from "../../common";
 import { remove, get, Store } from "lib";
-import { PageListData } from "./type";
+import { PageListData } from "../type";
 
 export async function removeUser(store: Store<PageListData>, id: number) {
     await remove(`/api/users/${id}`);
