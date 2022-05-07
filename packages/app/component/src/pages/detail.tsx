@@ -1,5 +1,4 @@
-import { PageDetailData, saveUser, UserError } from "detail-page";
-import { UserAccount } from "common-page";
+import { PageDetailData, saveUser, UserError, UserAccount } from 'user-manager';
 import React, { useState, useCallback } from "react";
 import { preventDefault, Store } from 'lib'
 import  TextField from "../common/text-field";

@@ -1,4 +1,4 @@
-import { HomeLocation, UserAccount } from "common-page";
+import { HomeLocation, UserAccount } from "../common";
 import { remove, get, Store } from "lib";
 import { PageListData } from "./type";
 

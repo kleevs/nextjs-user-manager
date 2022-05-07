@@ -1,8 +1,7 @@
 import React, { useMemo } from "react";
 import { useRouter } from 'next/router'
-import { ListModule } from 'user-manager-react'
-import { PageListData } from "list-page";
-import { UserAccount } from "common-page";
+import { PageListData, UserAccount } from 'user-manager'
+import { ListModule } from "component";
 import { createStore, get } from "lib";
 import { useEffect } from "react";
 

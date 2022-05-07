@@ -1,4 +1,4 @@
-import { UserAccount, PageData } from "common-page";
+import { UserAccount, PageData } from "../common";
 
 export type PageListData = PageData & {
     users: UserAccount[];

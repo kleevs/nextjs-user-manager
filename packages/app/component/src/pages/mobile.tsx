@@ -1,9 +1,7 @@
 import { DetailModule } from './detail'
 import React, { useCallback } from "react";
 import styled from "styled-components";
-import { moveOnDetail, moveOnHome } from 'common-page';
-import { PageListData, removeUser } from 'list-page';
-import { PageDetailData } from 'detail-page';
+import { moveOnDetail, moveOnHome, PageListData, removeUser, PageDetailData  } from 'user-manager';
 import { useSelector } from '../hooks/use-selector';
 import { dateToString, preventDefault, stopPropagation, Store } from "lib";
 
