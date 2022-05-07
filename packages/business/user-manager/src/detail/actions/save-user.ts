@@ -1,8 +1,19 @@
-import { UserError, PageDetailData } from "../type";
+import { UserError } from "../type";
 import { get, post, Store } from 'lib';
-import { UserAccount, DetailLocation } from "../../common/actions";
+import { UserAccount } from "../../common";
 
-export async function saveUser(store: Store<PageDetailData>, user: UserAccount) { 
+export type SaveUserDataDeps = {
+    href: string;
+    user: UserAccount;
+    meta: {
+        uri: {
+            detail: (id: number) => string;
+        }
+    }
+}
+
+export async function saveUser(store: Store<SaveUserDataDeps>, user: UserAccount) { 
+    const { meta: { uri } } = store.getValue();
     let errors: UserError = {};
     if (!user.password) {
         errors = { ...errors, passwordError: 'Renseigner un mot de passe' };
@@ -39,7 +50,7 @@ export async function saveUser(store: Store<PageDetailData>, user: UserAccount) 
 
     const id = await post<number, UserAccount>(`/api/users/${result.id}`, result);
     const newValue = await get<UserAccount>(`/api/users/${id}`);
-    store.update({...store.getValue(), user: newValue, href: DetailLocation(id) });
+    store.update({...store.getValue(), user: newValue, href: uri.detail(id) });
 
     return id;
 }

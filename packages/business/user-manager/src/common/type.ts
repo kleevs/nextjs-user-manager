@@ -12,7 +12,3 @@ export interface Account {
 }
 
 export type UserAccount = User & Account;
-
-export type PageData = {
-    href: string;
-}

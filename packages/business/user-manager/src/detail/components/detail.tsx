@@ -1,6 +1,6 @@
-import { PageDetailData, UserError } from '../type';
+import { UserError } from '../type';
 import { UserAccount } from '../../common';
-import { saveUser } from '../actions';
+import { saveUser, SaveUserDataDeps } from '../actions';
 import React, { useState, useCallback } from "react";
 import { preventDefault, Store } from 'lib'
 import  { TextField, DateField, useSelector } from "../../common";
@@ -8,8 +8,10 @@ import styled from 'styled-components';
 
 export const Checkbox = styled.input``;
 
+export type DetailDataDeps = SaveUserDataDeps;
+
 export function DetailModule({ pageData }: {
-    pageData: Store<PageDetailData>;
+    pageData: Store<DetailDataDeps>;
 }) {
     const userInit = useSelector(pageData, ({ user }) => user)
     const [user, onChange] = useState<UserAccount>(() => userInit || { id: 0 });

@@ -1,5 +1,5 @@
-import { PageListData, removeUser } from '../actions';
-import { moveOnDetail, DetailLocation } from '../../common';
+import { RemoveDataDeps, removeUser } from '../actions';
+import { moveOnDetail } from '../../common';
 import React from "react";
 import { useSelector } from "../../common";
 import { dateToString, preventDefault, stopPropagationAndPreventDefault, Store } from "lib";
@@ -14,9 +14,18 @@ const Link = styled.a`
     cursor: pointer;
 `
 
+export type ListDataDeps = RemoveDataDeps & {
+    meta: {
+        uri: {
+            detail: (id: number) => string;
+        }
+    }
+}
+
 export function ListModule({pageData}: {
-    pageData: Store<PageListData>;
+    pageData: Store<ListDataDeps>;
 }) {
+    const detailUri  = useSelector(pageData, ({ meta }) => meta.uri.detail);
     const users = useSelector(pageData, ({ users }) => users); 
 
     return <div> 
@@ -36,12 +45,12 @@ export function ListModule({pageData}: {
                         <Cellule>{dateToString(_.birthdate, '')}</Cellule>
                         <Cellule>{_.login}</Cellule>
                         <Cellule>{_.isActif ? 'actif' : 'inactif'}</Cellule>
-                        <Cellule><Link href={DetailLocation(_.id)} onClick={(e) => stopPropagationAndPreventDefault(e, () => moveOnDetail(pageData, _.id))}>Modifier</Link></Cellule>        
+                        <Cellule><Link href={detailUri(_.id)} onClick={(e) => stopPropagationAndPreventDefault(e, () => moveOnDetail(pageData, _.id))}>Modifier</Link></Cellule>        
                         <Cellule><Link onClick={(e) => stopPropagationAndPreventDefault(e, () => removeUser(pageData, _.id))}>X</Link></Cellule>        
                     </Row>)}
                 </Body>
             </TableStyled>
-            <Link href={DetailLocation(null)} onClick={(e) => preventDefault(e, () => moveOnDetail(pageData, null))}>Nouvel utilisateur</Link>
+            <Link href={detailUri(null)} onClick={(e) => preventDefault(e, () => moveOnDetail(pageData, null))}>Nouvel utilisateur</Link>
         </div>
     </div>
 }

@@ -1,12 +1,21 @@
 import React, { useMemo } from "react";
 import { useRouter } from 'next/router'
-import { PageListData, UserAccount, ListModule } from 'user-manager'
+import { ListDataDeps, UserAccount, ListModule } from 'user-manager'
 import { createStore, get } from "lib";
 import { useEffect } from "react";
 
 function createListPageData() {
     const users: UserAccount[] = [];
-    const store = createStore<PageListData>({ users, href: '/' });
+    const store = createStore<ListDataDeps>({ 
+        meta: {
+            uri: {
+                home: '/',
+                detail: (id) => `/users/${id}`
+            }
+        },
+        users, 
+        href: '/',
+    });
 
     if( typeof window !== 'undefined') {
         get<UserAccount[]>('/api/users').then((users) => {

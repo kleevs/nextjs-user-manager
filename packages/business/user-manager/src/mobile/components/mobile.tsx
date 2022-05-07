@@ -1,9 +1,8 @@
-import { DetailModule } from '../../detail'
+import { DetailModule, DetailDataDeps } from '../../detail'
 import React, { useCallback } from "react";
 import styled from "styled-components";
 import { moveOnDetail, moveOnHome  } from '../../common';
-import { PageListData, removeUser  } from '../../list';
-import { PageDetailData  } from '../../detail';
+import { removeUser, ListDataDeps  } from '../../list';
 import { useSelector } from '../../common';
 import { dateToString, preventDefault, stopPropagation, Store } from "lib";
 
@@ -35,8 +34,10 @@ const Block = styled.div`
     `}
 `;
 
+export type MobileDataDeps = DetailDataDeps & ListDataDeps;
+
 export function MobileModule({pageData }: {
-    pageData: Store<PageListData & PageDetailData>;
+    pageData: Store<MobileDataDeps>;
 }) {
     const sidebarOpen = useSelector(pageData, ({ href }) => href?.startsWith('/users') || false); 
     const users = useSelector(pageData, ({ users }) => users); 

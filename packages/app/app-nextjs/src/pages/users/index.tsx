@@ -1,11 +1,19 @@
 import React, { useEffect, useMemo } from "react";
 import { useRouter } from 'next/router'
-import { PageDetailData, UserAccount, DetailModule } from "user-manager";
+import { DetailDataDeps, UserAccount, DetailModule } from "user-manager";
 import { createStore } from "lib";
 
 function createListPageData() {
     const user: UserAccount = null;
-    const store = createStore<PageDetailData>({ user, href: '/users' });
+    const store = createStore<DetailDataDeps>({ 
+        meta: {
+            uri: {
+                detail: (id) => `/users/${id}`
+            }
+        },
+        user, 
+        href: '/users',
+    });
 
     return store;
 }

@@ -1,12 +1,21 @@
-import { Store, Updater } from "lib";
-import { PageData } from "../type";
+import { Store } from "lib";
 
-export const HomeLocation = '/'; 
-export function moveOnHome<T>(store: Store<T> & Updater<PageData>) {
-    store.update({...store.getValue(), href: HomeLocation })
+type DataDeps = {
+    href: string;
+    meta: {
+        uri: {
+            home: string;
+            detail: (id: number) => string;
+        }
+    }
 }
 
-export const DetailLocation = (id: number) => !!id ? `/users/${id}` : '/users'; 
-export function moveOnDetail<T>(store: Store<T> & Updater<PageData>, id: number) {
-    store.update({...store.getValue(), href: DetailLocation(id) })
+export function moveOnHome<T extends DataDeps>(store: Store<T>) {
+    const current = store.getValue();
+    store.update({...current, href: current.meta.uri.home })
+}
+
+export function moveOnDetail<T extends DataDeps>(store: Store<T>, id: number) {
+    const current = store.getValue();
+    store.update({...current, href: current.meta.uri.detail(id) })
 }
