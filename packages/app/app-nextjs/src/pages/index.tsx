@@ -5,31 +5,31 @@ import { createStore, get } from "lib";
 import { useEffect } from "react";
 
 function createListPageData() {
-    const users: UserAccount[] = [];
-    const store = createStore<ListDataDeps>({ 
+    const result: ListDataDeps = { 
         meta: {
             uri: {
                 home: '/',
-                detail: (id) => `/users/${id}`
+                detail: '/users/:id'
             }
         },
-        users, 
+        users: [], 
         href: '/',
-    });
+    };
 
-    if( typeof window !== 'undefined') {
-        get<UserAccount[]>('/api/users').then((users) => {
-            store.update({...store.getValue(), users});
-        })
-    }
-
-    return store;
+    return result;
 }
 
 export default function ListPage() {
-    const pageData = useMemo(() => createListPageData(), []);
+    const pageData = useMemo(() => createStore<ListDataDeps>(createListPageData()), []);
     const router = useRouter();
     useEffect(() => pageData.onUpdate(({ href }) => [href], ({href}) => router.push(href)), [router, pageData])
+    useEffect(() => {
+        if( typeof window !== 'undefined') {
+            get<UserAccount[]>('/api/users').then((users) => {
+                pageData.update({...pageData.getValue(), users});
+            })
+        }
+    }, [pageData])
 
     return <ListModule pageData={pageData} />
 }

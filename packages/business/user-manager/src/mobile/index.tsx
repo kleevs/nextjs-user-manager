@@ -1,9 +1,10 @@
-import { DetailModule, DetailDataDeps } from '../../detail'
+import { DetailModule, DetailDataDeps } from '../detail'
 import React, { useCallback } from "react";
 import styled from "styled-components";
-import { moveOnDetail, moveOnHome  } from '../../common';
-import { removeUser, ListDataDeps  } from '../../list';
-import { useSelector } from '../../common';
+import { moveOnDetail, moveOnHome  } from '../common';
+import { ListDataDeps  } from '../list';
+import { useSelector } from '../common';
+import { removeUser } from './actions';
 import { dateToString, preventDefault, stopPropagation, Store } from "lib";
 
 const Container = styled.div`

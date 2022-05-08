@@ -1,13 +1,12 @@
-import { UserError } from "../type";
-import { get, post, Store } from 'lib';
-import { UserAccount } from "../../common";
+import { get, post, Store, format } from 'lib';
+import { detailUri, UserAccount, UserError } from "../../common";
 
 export type SaveUserDataDeps = {
     href: string;
     user: UserAccount;
     meta: {
         uri: {
-            detail: (id: number) => string;
+            detail: string;
         }
     }
 }
@@ -50,7 +49,5 @@ export async function saveUser(store: Store<SaveUserDataDeps>, user: UserAccount
 
     const id = await post<number, UserAccount>(`/api/users/${result.id}`, result);
     const newValue = await get<UserAccount>(`/api/users/${id}`);
-    store.update({...store.getValue(), user: newValue, href: uri.detail(id) });
-
-    return id;
+    store.update({...store.getValue(), user: newValue, href: detailUri(store, id) });
 }

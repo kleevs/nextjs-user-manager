@@ -1,9 +1,8 @@
-import { UserError } from '../type';
-import { UserAccount } from '../../common';
-import { saveUser, SaveUserDataDeps } from '../actions';
+import { UserAccount, UserError } from '../common';
+import { saveUser, SaveUserDataDeps } from './actions';
 import React, { useState, useCallback } from "react";
 import { preventDefault, Store } from 'lib'
-import  { TextField, DateField, useSelector } from "../../common";
+import  { TextField, DateField, useSelector } from "../common";
 import styled from 'styled-components';
 
 export const Checkbox = styled.input``;

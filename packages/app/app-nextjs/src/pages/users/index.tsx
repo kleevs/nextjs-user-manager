@@ -5,21 +5,21 @@ import { createStore } from "lib";
 
 function createListPageData() {
     const user: UserAccount = null;
-    const store = createStore<DetailDataDeps>({ 
+    const result: DetailDataDeps = { 
         meta: {
             uri: {
-                detail: (id) => `/users/${id}`
+                detail: '/users/:id'
             }
         },
         user, 
         href: '/users',
-    });
+    };
 
-    return store;
+    return result;
 }
 
 export default function DetailPage() {
-    const pageData = useMemo(() => createListPageData(), []);
+    const pageData = useMemo(() => createStore(createListPageData()), []);
     const router = useRouter();
     useEffect(() => pageData.onUpdate(({ href }) => [href], ({href}) => router.push(href)), [router, pageData])
 

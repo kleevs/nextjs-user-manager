@@ -4,31 +4,32 @@ import { DetailDataDeps, UserAccount, DetailModule } from "user-manager";
 import { createStore, get } from "lib";
 
 function createListPageData(id: number) {
-    const user: UserAccount = null;
-    const store = createStore<DetailDataDeps>({ 
+    const result: DetailDataDeps = { 
         meta: {
             uri: {
-                detail: (id) => `/users/${id}`
+                detail: '/users/:id'
             }
         },
-        user, 
+        user: null, 
         href: `/users/${id}`
-    });
+    };
 
-    if( typeof window !== 'undefined') {
-        get<UserAccount>('/api/users').then((user) => {
-            store.update({...store.getValue(), user});
-        })
-    }
-
-    return store;
+    return result;
 }
 
 export default function DetailPage() {
     const router = useRouter();
     const id = +router.query.id || 0;
-    const pageData = useMemo(() => createListPageData(id), [id]);
+    const pageData = useMemo(() => createStore(createListPageData(id)), [id]);
     useEffect(() => pageData.onUpdate(({ href }) => [href], ({href}) => router.push(href)), [router, pageData])
+    useEffect(() => {
+        
+        if( typeof window !== 'undefined') {
+            get<UserAccount>('/api/users').then((user) => {
+                pageData.update({...pageData.getValue(), user});
+            })
+        }
+    }, [pageData])
 
     return <DetailModule pageData={pageData} />
 }
