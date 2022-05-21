@@ -1,10 +1,13 @@
 import React, { useMemo } from "react";
-import { useRouter } from 'next/router'
 import { ListDataDeps, UserAccount, ListModule } from 'user-manager'
-import { createStore, get } from "lib";
-import { useEffect } from "react";
+import { createStore } from "lib";
+import { useHrefEffect } from "src/hooks/use-href-effect";
 
-function createListPageData() {
+type PageProps = {
+    users: UserAccount[]
+}
+
+function createListPageData(users: UserAccount[]) {
     const result: ListDataDeps = { 
         meta: {
             uri: {
@@ -12,24 +15,24 @@ function createListPageData() {
                 detail: '/users/:id'
             }
         },
-        users: [], 
+        users, 
         href: '/',
     };
 
     return result;
 }
 
-export default function ListPage() {
-    const pageData = useMemo(() => createStore<ListDataDeps>(createListPageData()), []);
-    const router = useRouter();
-    useEffect(() => pageData.onUpdate(({ href }) => [href], ({href}) => router.push(href)), [router, pageData])
-    useEffect(() => {
-        if( typeof window !== 'undefined') {
-            get<UserAccount[]>('/api/users').then((users) => {
-                pageData.update({...pageData.getValue(), users});
-            })
-        }
-    }, [pageData])
-
+export default function ListPage({ users }: PageProps) {
+    const pageData = useMemo(() => createStore<ListDataDeps>(createListPageData(users)), [users]);
+    useHrefEffect(pageData);
     return <ListModule pageData={pageData} />
+}
+
+export async function getServerSideProps(): Promise<{ props: PageProps }> {
+    // Fetch data from external API
+    const res = await fetch('/api/users')
+    const users = await res.json() as UserAccount[]
+  
+    // Pass data to the page via props
+    return { props: { users } }
 }
