@@ -1,0 +1,17 @@
+{
+  "name": "lib-ui",
+  "version": "0.0.1",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "@types/jest": "27.0.2",
+    "axios": "0.21.0",
+    "lib": "^0.0.1"
+  },
+  "keywords": [],
+  "author": "kleevs",
+  "license": "MIT"
+}

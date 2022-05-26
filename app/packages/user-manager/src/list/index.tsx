@@ -1,7 +1,6 @@
-import { RemoveDataDeps, removeUser } from './actions';
-import { detailUri, moveOnDetail } from '../common';
-import React, { useCallback } from "react";
-import { useSelector } from "../common";
+import { detailUri, moveOnDetail, removeUser, RemoveDataDeps } from '../common';
+import React from "react";
+import { useSelector } from "lib-ui";
 import { dateToString, preventDefault, stopPropagationAndPreventDefault, Store, format } from "lib";
 import styled from 'styled-components';
 

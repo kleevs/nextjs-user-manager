@@ -1,4 +1,4 @@
-import { get, post, Store, format } from 'lib';
+import { get, post, Store } from 'lib';
 import { detailUri, UserAccount, UserError } from "../../common";
 
 export type SaveUserDataDeps = {
