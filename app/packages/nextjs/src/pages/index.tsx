@@ -1,31 +1,15 @@
-import React, { useMemo } from "react";
-import { ListDataDeps, UserAccount, ListModule } from 'user-manager'
-import { createStore } from "lib";
-import { useHrefEffect } from "src/hooks/use-href-effect";
+import React from "react";
+import { ListModule } from 'user-manager-ui'
+import { UserAccount } from "user-manager";
+import { useAppContext } from "src/hooks/use-app-context";
 
 type PageProps = {
     users: UserAccount[]
 }
 
-function createListPageData(users: UserAccount[]) {
-    const result: ListDataDeps = { 
-        meta: {
-            uri: {
-                home: '/',
-                detail: '/users/:id'
-            }
-        },
-        users, 
-        href: '/',
-    };
-
-    return result;
-}
-
 export default function ListPage({ users }: PageProps) {
-    const pageData = useMemo(() => createStore<ListDataDeps>(createListPageData(users)), [users]);
-    useHrefEffect(pageData);
-    return <ListModule pageData={pageData} />
+    const context = useAppContext();
+    return <ListModule context={context} />
 }
 
 export async function getServerSideProps(): Promise<{ props: PageProps }> {

@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "7DrkHxo/cVdQ64Ew5eH1c87BliKUQTp0lZxlITeOPjDAd/WwnDIQaABfQnQULiIh3x9O7Zr5WxlIHsIeP5+RmA==",
+  "success": true,
+  "projectFilePath": "C:\\_Projects\\Github\\nextjs-user-manager\\api\\UserManager\\UserDatabase\\UserDatabase.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\kleevs\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.15.1\\microsoft.visualstudio.azure.containers.tools.targets.1.15.1.nupkg.sha512"
+  ],
+  "logs": []
+}

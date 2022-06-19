@@ -4,7 +4,11 @@
   "description": "",
   "scripts": {
     "test": "jest",
-    "dev": "yarn workspace nextjs run dev"
+    "dev": "yarn workspace nextjs run dev",
+    "build-user-manager": "yarn workspace user-manager build",
+    "build-user-manager-ui": "yarn workspace user-manager-ui build",
+    "build-lib": "yarn workspace lib build",
+    "build-lib-ui": "yarn workspace lib-ui build"
   },
   "private": true,
   "workspaces": [

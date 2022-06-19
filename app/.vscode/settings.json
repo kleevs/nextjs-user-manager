@@ -8,6 +8,7 @@
                                 // named "node_modules" from 
                                 // the explore tree
 
+        "**/dist": true,
         // alternative version
         "node_modules": true    // this excludes the folder 
                                 // only from the root of
