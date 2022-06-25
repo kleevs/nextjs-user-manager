@@ -1,11 +1,24 @@
 import React from "react";
-import { useRouter } from 'next/router'
 import { DetailModule } from "user-manager-ui";
-import { useAppContext } from "src/hooks/use-app-context";
+import { useDetailPage } from "src/hooks/use-detail-page-context";
+import { UserAccount } from "user-manager";
 
-export default function DetailPage() {
-    const router = useRouter();
-    const id = +router.query.id || 0;
-    const context = useAppContext();
-    return <DetailModule context={context} id={id} />
+type PageProps = {
+    user: UserAccount
+}
+
+export default function DetailPage({ user }: PageProps) {
+    const context = useDetailPage(user);
+    return <DetailModule context={context} />
+}
+
+export async function getServerSideProps(req): Promise<{ props: PageProps }> {
+    const { id } = req.query;
+
+    // Fetch data from external API
+    const res = await fetch(`http://localhost:3000/api/users/${id}`)
+    const user = await res.json() as UserAccount
+  
+    // Pass data to the page via props
+    return { props: { user } }
 }

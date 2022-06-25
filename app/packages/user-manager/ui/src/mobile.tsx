@@ -1,8 +1,8 @@
 import { DetailModule } from './detail'
 import React, { useCallback } from "react";
 import styled from "styled-components";
-import { moveOnDetail, removeUser, loadUsers, AppContext } from 'user-manager';
-import { useAsync } from 'lib-ui';
+import { moveOnDetail, removeUser, ListPageContext, DetailPageContext } from 'user-manager';
+import { useSelector } from 'lib-ui';
 import { dateToString, preventDefault, stopPropagation } from "lib";
 
 const Container = styled.div`
@@ -33,20 +33,17 @@ const Block = styled.div`
     `}
 `;
 
-export function MobileModule({ context, id, sidebarOpen }: {
-    id: number;
+export function MobileModule({ context, sidebarOpen }: {
     sidebarOpen: boolean;
-    context: AppContext;
+    context: ListPageContext & DetailPageContext;
 }) {
-    const users = useAsync(() => loadUsers(), []); 
-    const remove = useCallback((id: number) => {
-        removeUser(context, id); 
-    }, [context]);
+    const users = useSelector(context.users); 
+    const remove = useCallback((id: number) => removeUser(context, id), [context]);
 
     return <Container>
         {sidebarOpen && <Overlay onClick={() => context?.moveTo(context?.uri?.home)}/>}
         <Block open={sidebarOpen}>
-            <DetailModule context={context} id={id} />
+            <DetailModule context={context} />
         </Block>
         <div> 
             <h1>Liste des utilisateurs</h1> 

@@ -1,16 +1,15 @@
-import { saveUser, DetailPageContext, AppContext, loadUser, UserAccount, UserError } from 'user-manager';
+import { saveUser, DetailPageContext, UserAccount, UserError } from 'user-manager';
 import React, { useState, useCallback, useMemo } from "react";
 import { preventDefault } from 'lib'
-import  { TextField, DateField, useAsync } from "lib-ui";
+import  { TextField, DateField, useSelector } from "lib-ui";
 import styled from 'styled-components';
 
 export const Checkbox = styled.input``;
 
-export function DetailModule({ id, context }: {
-    id: number;
-    context: AppContext;
+export function DetailModule({ context }: {
+    context: DetailPageContext;
 }) {
-    const userInit = useAsync(() => loadUser(id), [])
+    const userInit = useSelector(context.user)
     const [user, onChange] = useState<UserAccount>(() => userInit || { id: 0 });
     const [errors, setErrors] = useState<UserError>({});
     const detailContext = useMemo<DetailPageContext>(() => ({...context}), []);

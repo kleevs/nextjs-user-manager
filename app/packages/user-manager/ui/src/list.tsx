@@ -1,6 +1,6 @@
-import { detailUri, moveOnDetail, removeUser, loadUsers, ListPageContext, AppContext } from 'user-manager';
-import React, { useMemo } from "react";
-import { useAsync } from "lib-ui";
+import { detailUri, moveOnDetail, removeUser, ListPageContext } from 'user-manager';
+import React from "react";
+import { useSelector } from "lib-ui";
 import { dateToString, preventDefault, stopPropagationAndPreventDefault, Store } from "lib";
 import styled from 'styled-components';
 
@@ -14,10 +14,9 @@ const Link = styled.a`
 `
 
 export function ListModule({context}: {
-    context: AppContext;
+    context: ListPageContext;
 }) {
-    const listContext = useMemo<ListPageContext>(() => ({...context}), []);
-    const users = useAsync(() => loadUsers(), []); 
+    const users = useSelector(context.users); 
 
     return <div> 
         <h1>Liste des utilisateurs</h1> 
@@ -36,12 +35,12 @@ export function ListModule({context}: {
                         <Cellule>{dateToString(_.birthdate, '')}</Cellule>
                         <Cellule>{_.login}</Cellule>
                         <Cellule>{_.isActif ? 'actif' : 'inactif'}</Cellule>
-                        <Cellule><Link href={detailUri(listContext, _.id)} onClick={(e) => stopPropagationAndPreventDefault(e, () => moveOnDetail(listContext, _.id))}>Modifier</Link></Cellule>        
-                        <Cellule><Link onClick={(e) => stopPropagationAndPreventDefault(e, () => removeUser(listContext, _.id))}>X</Link></Cellule>        
+                        <Cellule><Link href={detailUri(context, _.id)} onClick={(e) => stopPropagationAndPreventDefault(e, () => moveOnDetail(context, _.id))}>Modifier</Link></Cellule>        
+                        <Cellule><Link onClick={(e) => stopPropagationAndPreventDefault(e, () => removeUser(context, _.id))}>X</Link></Cellule>        
                     </Row>)}
                 </Body>
             </TableStyled>
-            <Link href={detailUri(context, null)} onClick={(e) => preventDefault(e, () => moveOnDetail(listContext, null))}>Nouvel utilisateur</Link>
+            <Link href={detailUri(context, null)} onClick={(e) => preventDefault(e, () => moveOnDetail(context, null))}>Nouvel utilisateur</Link>
         </div>
     </div>
 }

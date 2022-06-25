@@ -5,10 +5,10 @@
   "scripts": {
     "test": "jest",
     "dev": "yarn workspace nextjs run dev",
-    "build-user-manager": "yarn workspace user-manager build",
-    "build-user-manager-ui": "yarn workspace user-manager-ui build",
-    "build-lib": "yarn workspace lib build",
-    "build-lib-ui": "yarn workspace lib-ui build"
+    "user-manager:build": "yarn workspace user-manager build",
+    "user-manager-ui:build": "yarn workspace user-manager-ui build",
+    "lib:build": "yarn workspace lib build",
+    "lib-ui:build": "yarn workspace lib-ui build"
   },
   "private": true,
   "workspaces": [

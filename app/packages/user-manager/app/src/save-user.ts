@@ -1,5 +1,5 @@
 import { post } from 'lib';
-import { moveOnDetail } from 'move-on-detail';
+import { moveOnDetail } from './move-on-detail';
 import { DetailPageContext, UserAccount, UserError } from "./common/type";
 
 export async function saveUser(context: DetailPageContext, user: UserAccount) { 

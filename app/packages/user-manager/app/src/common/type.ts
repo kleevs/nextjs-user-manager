@@ -1,3 +1,5 @@
+import { Store } from 'lib';
+
 export interface User {
     readonly id: number;
     readonly lastName?: string;
@@ -30,7 +32,9 @@ export type AppContext = {
 }
 
 export type ListPageContext = AppContext & {
+    users: Store<UserAccount[]>;
 }
 
 export type DetailPageContext = AppContext & {
+    user: Store<UserAccount>;
 }
