@@ -1,4 +1,5 @@
 using UserManager.Endpoints;
+using UserManager.Tools;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,7 +38,10 @@ app.MapGet("/weatherforecast", () =>
 })
 .WithName("GetWeatherForecast");
 
-app.MapGet("/signin", () => new Signin().Execute());
+app.MapGet("/signin", (HttpContext context, string login, string password) => 
+    new Signin(Dal.GetUserByLogin, new ResponseHelper(context).AddClaim).Execute(login, password));
+
+app.MapGet("/users", (HttpContext context) => Dal.GetUsers());
 
 app.Run();
 

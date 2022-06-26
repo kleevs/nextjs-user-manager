@@ -2,6 +2,7 @@ import React from "react";
 import { DetailModule } from "user-manager-ui";
 import { useDetailPage } from "src/hooks/use-detail-page-context";
 import { UserAccount } from "user-manager";
+import { apiDomain } from "src/config/constant";
 
 type PageProps = {
     user: UserAccount
@@ -16,7 +17,7 @@ export async function getServerSideProps(req): Promise<{ props: PageProps }> {
     const { id } = req.query;
 
     // Fetch data from external API
-    const res = await fetch(`http://localhost:3000/api/users/${id}`)
+    const res = await fetch(`${apiDomain}/users/${id}`)
     const user = await res.json() as UserAccount
   
     // Pass data to the page via props

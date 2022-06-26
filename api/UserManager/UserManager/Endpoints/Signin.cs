@@ -3,42 +3,39 @@
 public interface IUser
 {
     public string Login { get; }
+    public string Password { get; }
 }
 
-public interface IClaim : IUser
+public interface IClaim
 {
-}
-
-internal record Claim(string Login) : IClaim
-{
-}
-
-public interface IUsersQuery 
-{
-    IUser GetUser(string login, string password);
-}
-
-public interface IHttpContext
-{
-    void AddCookie(IClaim claim);
+    public string Login { get; }
 }
 
 class Signin
 {
-    private readonly IUsersQuery _usersQuery;
-    private readonly IHttpContext _httpContext;
+    public delegate IUser UsersQuery(string login, string password);
+    public delegate void ClaimRegister(IClaim claim);
+    private record Claim(string Login) : IClaim;
 
-    public Signin(IUsersQuery usersQuery, IHttpContext httpContext)
+    private readonly UsersQuery _usersQuery;
+    private readonly ClaimRegister _claimRegister;
+
+    public Signin(UsersQuery usersQuery, ClaimRegister claimRegister)
     {
         _usersQuery = usersQuery;
-        _httpContext = httpContext;
+        _claimRegister = claimRegister;
     }
 
-    public string Execute(string login, string password) 
+    public string Execute(string login, string password)
     {
-        var user = _usersQuery.GetUser(login, password);
-        _httpContext.AddCookie(new Claim(user.Login));
-        return user.Login;
+        var user = _usersQuery(login, password);
+        if (user != null)
+        {
+            _claimRegister(new Claim(user.Login));
+            return user.Login;
+        }
+
+        return string.Empty;
     }
 }
 

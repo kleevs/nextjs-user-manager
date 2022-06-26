@@ -1,0 +1,1 @@
+export const apiDomain = "https://localhost:44343"
