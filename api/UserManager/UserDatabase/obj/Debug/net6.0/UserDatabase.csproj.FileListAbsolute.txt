@@ -1,6 +1,0 @@
-C:\_Projects\Github\nextjs-user-manager\api\UserManager\UserDatabase\obj\Debug\net6.0\UserDatabase.csproj.AssemblyReference.cache
-C:\_Projects\Github\nextjs-user-manager\api\UserManager\UserDatabase\obj\Debug\net6.0\UserDatabase.GeneratedMSBuildEditorConfig.editorconfig
-C:\_Projects\Github\nextjs-user-manager\api\UserManager\UserDatabase\obj\Debug\net6.0\UserDatabase.AssemblyInfoInputs.cache
-C:\_Projects\Github\nextjs-user-manager\api\UserManager\UserDatabase\obj\Debug\net6.0\UserDatabase.AssemblyInfo.cs
-C:\_Projects\Github\nextjs-user-manager\api\UserManager\UserDatabase\obj\Debug\net6.0\UserDatabase.csproj.CoreCompileInputs.cache
-C:\_Projects\Github\nextjs-user-manager\api\UserManager\UserDatabase\obj\Debug\net6.0\UserDatabase.MvcApplicationPartsAssemblyInfo.cache

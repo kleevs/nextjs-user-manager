@@ -1,6 +1,6 @@
-import { get } from 'lib';
-import { UserAccount } from "./common/type";
+import { apiDomain } from "config/constant";
+import { HttpGet, UserAccount } from "./common/type";
 
-export async function loadUser(id: number) { 
-    return await get<UserAccount>(`/api/users/${id}`);
+export async function loadUser(get: HttpGet, id: number) { 
+    return await get<UserAccount>(`${apiDomain}/users/${id}`);
 }

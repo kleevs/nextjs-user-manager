@@ -1,5 +1,5 @@
-using UserManager.Endpoints;
-using UserManager.Tools;
+using UserManager.Authentication;
+using UserManager.Manager;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,34 +18,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast = Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateTime.Now.AddDays(index),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast");
-
-app.MapGet("/signin", (HttpContext context, string login, string password) => 
-    new Signin(Dal.GetUserByLogin, new ResponseHelper(context).AddClaim).Execute(login, password));
-
-app.MapGet("/users", (HttpContext context) => Dal.GetUsers());
-
+app.UseManager();
+app.UseUserAuthentication();
 app.Run();
-
-internal record WeatherForecast(DateTime Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
