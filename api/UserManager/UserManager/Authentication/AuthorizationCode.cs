@@ -1,4 +1,4 @@
-﻿using UserManager.Models;
+﻿using UserManager.Tools;
 
 namespace UserManager.Authentication;
 
@@ -6,9 +6,13 @@ class AuthorizationCode
 {
     public delegate DateTime DateNow();
     public delegate string Crypt(string text);
-    record AuthCode(string Code) : IAuthCode;
     private readonly Crypt _crypt;
     private readonly DateNow _dateNow;
+    record AuthCode(string Code) : IAuthCode;
+    public interface IAuthCode
+    {
+        public string Code { get; }
+    }
 
     public AuthorizationCode(DateNow dateNow, Crypt crypt)
     {
@@ -24,7 +28,6 @@ class AuthorizationCode
         }
 
         var code = _crypt($"{_dateNow()}|{state}|{client}|{connectedUser.Login}");
-
         return new AuthCode(code);
     }
 }

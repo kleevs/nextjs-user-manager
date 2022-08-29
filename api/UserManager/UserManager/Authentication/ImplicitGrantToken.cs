@@ -1,4 +1,4 @@
-﻿using UserManager.Models;
+﻿using UserManager.Tools;
 
 namespace UserManager.Authentication;
 
@@ -7,6 +7,11 @@ class ImplicitGrantToken
     public delegate DateTime DateNow();
     public delegate string Crypt(string text);
     record AuthToken(string Token) : IAuthToken;
+    public interface IAuthToken
+    {
+        string Token { get; }
+    }
+
     private readonly DateNow _dateNow;
     private readonly Crypt _crypt;
 

@@ -1,4 +1,4 @@
-﻿namespace UserManager.Models;
+﻿namespace UserManager.Tools;
 
 public interface IUserFull : IUser
 {

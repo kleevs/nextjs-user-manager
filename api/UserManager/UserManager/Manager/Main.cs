@@ -1,5 +1,4 @@
-﻿using UserManager.Models;
-using UserManager.Tools;
+﻿using UserManager.Tools;
 
 namespace UserManager.Manager;
 

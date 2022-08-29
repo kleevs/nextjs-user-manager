@@ -1,7 +1,4 @@
-﻿using System.Text.Json;
-using UserManager.Models;
-
-namespace UserManager.Tools
+﻿namespace UserManager.Tools
 {
     public class Crypto
     {

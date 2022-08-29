@@ -1,4 +1,4 @@
-﻿using UserManager.Models;
+﻿using UserManager.Tools;
 
 namespace UserManager.Authentication;
 
@@ -7,6 +7,10 @@ class Signin
     public delegate IUserFull UsersQuery(string login, string password);
     public delegate void ClaimRegister(IClaim claim);
     private record Claim(string Login) : IClaim;
+    public interface IClaim
+    {
+        string Login { get; }
+    }
 
     private readonly UsersQuery _usersQuery;
     private readonly ClaimRegister _claimRegister;

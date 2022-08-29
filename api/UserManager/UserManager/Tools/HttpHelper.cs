@@ -1,9 +1,9 @@
 ﻿using System.Text.Json;
-using UserManager.Models;
+using IClaim = UserManager.Authentication.Signin.IClaim;
 
 namespace UserManager.Tools
 {
-    public class HttpHelper
+    class HttpHelper
     {
         private record User(string Login) : IClaim, IUser;
         private readonly HttpContext _context;

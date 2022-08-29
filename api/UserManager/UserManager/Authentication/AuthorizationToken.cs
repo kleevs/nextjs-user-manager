@@ -1,6 +1,4 @@
-﻿using UserManager.Models;
-
-namespace UserManager.Authentication;
+﻿namespace UserManager.Authentication;
 
 class AuthorizationToken
 {
@@ -8,6 +6,10 @@ class AuthorizationToken
     public delegate DateTime DateParser(string date);
     public delegate string Crypt(string text);
     record AuthToken(string Token) : IAuthToken;
+    public interface IAuthToken
+    {
+        string Token { get; }
+    }
 
     private readonly DateNow _dateNow;
     private readonly DateParser _parser;

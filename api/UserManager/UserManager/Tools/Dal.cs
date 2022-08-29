@@ -1,6 +1,4 @@
-﻿using UserManager.Models;
-
-namespace UserManager.Tools
+﻿namespace UserManager.Tools
 {
     public static class Dal
     {
