@@ -1,0 +1,30 @@
+{
+  "name": "user-manager-storybook",
+  "version": "0.0.1",
+  "description": "",
+  "scripts": {
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
+  },
+  "peerDependencies": {
+    "jest": "^26.6.3",
+    "react": "17.0.1",
+    "react-dom": "17.0.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.19.3",
+    "@storybook/addon-actions": "^6.5.12",
+    "@storybook/addon-essentials": "^6.5.12",
+    "@storybook/addon-interactions": "^6.5.12",
+    "@storybook/addon-links": "^6.5.12",
+    "@storybook/builder-webpack4": "^6.5.12",
+    "@storybook/manager-webpack4": "^6.5.12",
+    "@storybook/react": "^6.5.12",
+    "@storybook/testing-library": "^0.0.13",
+    "@types/react-router-dom": "^5.1.7",
+    "babel-loader": "^8.2.5",
+    "ts-node": "^9.1.1",
+    "lib-ui": "^0.0.1"
+  },
+  "dependencies": {}
+}

@@ -8,12 +8,14 @@
     "user-manager:build": "yarn workspace user-manager build",
     "user-manager-ui:build": "yarn workspace user-manager-ui build",
     "lib:build": "yarn workspace lib build",
-    "lib-ui:build": "yarn workspace lib-ui build"
+    "lib-ui:build": "yarn workspace lib-ui build",
+    "storybook": "yarn workspace user-manager-storybook storybook",
+    "build-storybook": "yarn workspace user-manager-storybook build-storybook"
   },
   "private": true,
   "workspaces": [
     "packages/**",
-    "server"
+    "storybook"
   ],
   "peerDependencies": {
     "jest": "^26.6.3",
