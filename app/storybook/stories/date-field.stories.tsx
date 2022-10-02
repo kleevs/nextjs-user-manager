@@ -16,7 +16,7 @@ const Template = (args) => <DateField {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {
-  label: 'label',
+  label: 'lala',
   error: 'error',
   value: new Date(),
   onChange: (v: Date) => {}

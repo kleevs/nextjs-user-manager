@@ -4,13 +4,13 @@
   "description": "",
   "scripts": {
     "test": "jest",
-    "dev": "yarn workspace nextjs run dev",
     "user-manager:build": "yarn workspace user-manager build",
     "user-manager-ui:build": "yarn workspace user-manager-ui build",
     "lib:build": "yarn workspace lib build",
     "lib-ui:build": "yarn workspace lib-ui build",
-    "storybook": "yarn workspace user-manager-storybook storybook",
-    "build-storybook": "yarn workspace user-manager-storybook build-storybook"
+    "dev-server:build": "yarn workspace dev-server build",
+    "storybook:build": "yarn workspace user-manager-storybook build-storybook",
+    "dev": "bash .devtools/dev-server.sh"
   },
   "private": true,
   "workspaces": [
