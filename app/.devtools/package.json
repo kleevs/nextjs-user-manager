@@ -1,0 +1,8 @@
+{
+  "name": "devtools",
+  "version": "0.0.1",
+  "description": "",
+  "bin": {
+    "docker-run": "./bin/docker-run"
+  }
+}

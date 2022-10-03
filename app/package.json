@@ -11,10 +11,11 @@
     "dev-server:build": "yarn workspace dev-server build",
     "storybook:build": "yarn workspace user-manager-storybook build-storybook",
     "dev": "yarn workspace nextjs run dev & yarn workspace user-manager-storybook storybook",
-    "docker-run:dev": "bash .devtools/docker-run.sh dev"
+    "docker-run:dev": "docker-run dev"
   },
   "private": true,
   "workspaces": [
+    ".devtools",
     "packages/**",
     "storybook"
   ],
@@ -27,6 +28,7 @@
     "@types/jest": "^26.0.22",
     "@types/react-router-dom": "^5.1.7",
     "ts-jest": "^26.5.5",
-    "ts-node": "^9.1.1"
+    "ts-node": "^9.1.1",
+    "devtools": "^0.0.1"
   }
 }
