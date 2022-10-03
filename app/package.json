@@ -10,7 +10,8 @@
     "lib-ui:build": "yarn workspace lib-ui build",
     "dev-server:build": "yarn workspace dev-server build",
     "storybook:build": "yarn workspace user-manager-storybook build-storybook",
-    "dev": "bash .devtools/dev-server.sh"
+    "dev": "yarn workspace nextjs run dev & yarn workspace user-manager-storybook storybook",
+    "docker-run:dev": "bash .devtools/docker-run.sh dev"
   },
   "private": true,
   "workspaces": [
