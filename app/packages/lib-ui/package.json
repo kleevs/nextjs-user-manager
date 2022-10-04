@@ -8,8 +8,12 @@
   },
   "devDependencies": {
     "@types/jest": "27.0.2",
+    "@types/styled-components": "5.1.9",
     "axios": "0.21.0",
-    "lib": "^0.0.1"
+    "lib": "^0.0.1",
+    "react": "17.0.1",
+    "react-dom": "17.0.1",
+    "styled-components": "5.2.1"
   },
   "keywords": [],
   "author": "kleevs",

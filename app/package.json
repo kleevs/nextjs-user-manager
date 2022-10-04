@@ -21,16 +21,8 @@
     "packages/**",
     "storybook"
   ],
-  "peerDependencies": {
-    "jest": "^26.6.3",
-    "react": "17.0.1",
-    "react-dom": "17.0.1"
-  },
   "devDependencies": {
-    "@types/jest": "^26.0.22",
-    "@types/react-router-dom": "^5.1.7",
-    "ts-jest": "^26.5.5",
-    "ts-node": "^9.1.1",
-    "devtools": "^0.0.1"
+    "devtools": "^0.0.1",
+    "typescript": "^4.0.3"
   }
 }
