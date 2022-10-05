@@ -7,4 +7,4 @@ WORKDIR /src
 COPY . .
 RUN pnpm install
 
-CMD [ "npm", "start" ]
+CMD [ "npm", "run", "storybook" ]
