@@ -42,8 +42,8 @@ yarn-error.log*
 [Dd]ebug/
 [Rr]elease/
 x64/
-[Bb]in/
-[Oo]bj/
+api/**/[Bb]in/
+api/**/[Oo]bj/
 
 # MSTest test Results
 [Tt]est[Rr]esult*/
